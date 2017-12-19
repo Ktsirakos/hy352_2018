@@ -7,12 +7,19 @@
 //
 
 #include <iostream>
+#include <string>
+#include "../LOGO.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
-}
+START_PROGRAMM
+
+    MAKE hello = WORD: "hello world"
+    MAKE a = WORD: "come with me"
+    PRINT(a)
+    PRINT(hello)
+
+END_PROGRAMM
+
+
 
 
 //just an addition
