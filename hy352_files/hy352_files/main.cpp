@@ -14,8 +14,12 @@ START_PROGRAMM
 
     MAKE hello = WORD: "hello world"
     MAKE a = WORD: "come with me"
+    MAKE boolean = BOOLEAN: FALSE
+    MAKE integer = NUMBER:20
     PRINT(a)
     PRINT(hello)
+    PRINT(boolean)
+    PRINT(integer)
 
 END_PROGRAMM
 
