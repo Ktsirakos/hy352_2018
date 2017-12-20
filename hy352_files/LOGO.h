@@ -14,6 +14,55 @@
 #define TRUE true 
 #define FALSE false
 
-#define LIST \
 
+
+/**
+ * TODO gia to LIST 
+ * 
+ * class ListObject{
+ * 
+ *      vector < Object > list;
+ * 
+ *      .
+ *      .
+ *      .
+ *      .
+ * 
+ * }
+ * 
+ * 
+ * 
+ * 
+ * class Objects {
+ * 
+ *      string      valueString;
+ *      int         valueNumber;
+ *      bool        valueBool;
+ *      string      id;
+ *      ListObject  list;
+ * 
+ *      .
+ *      .
+ *      .
+ *      . 
+ * }
+ * 
+ *  LIST [ 
+ *          NUMBER:20 , 
+ *          LIST [ 
+ *                  STRING: "Hello" , 
+ *                  NUMBER: 10 
+ *               ]
+ *        ]
+ * 
+ * 
+ * 
+ * EINAI ------> ListObject <
+ *                          Object { valueNumber = 20;}
+ *                          ListObject < 
+ *                                      Object {  valueString = "Hello";}
+ *                                      Object {  valueNumber = 10;     }                                      
+ *                                        >
+ *                          >
+ * */
  
