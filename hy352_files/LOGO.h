@@ -16,46 +16,49 @@
 
 
 
-/**
- * TODO gia to LIST 
- * 
- * class ListObject{
- * 
- *      vector < Object > list;
- * 
- *      .
- *      .
- *      .
- *      .
- * 
- * }
- * 
- * 
- * 
- * 
- * class Objects {
- * 
- *      string      valueString;
- *      int         valueNumber;
- *      bool        valueBool;
- *      string      id;
- *      ListObject  list;
- * 
- *      .
- *      .
- *      .
- *      . 
- * }
- * 
+#include <vector>
+
+
+class Objects {
+  
+       string      valueString;
+       int         valueNumber;
+       bool        valueBool;
+       string      id;
+       ListObject  list;
+ 
+};
+
+
+class NumberObject : public Objects {
+
+};
+
+class WordObject : public Objects {
+
+};
+
+class BooleanObject : public Objects {
+
+};
+
+class ListObject{
+ 
+      vector < Objects > list;
+};
+  
+ 
+
+ 
+ /*  
  *  LIST [ 
  *          NUMBER:20 , 
  *          LIST [ 
- *                  STRING: "Hello" , 
- *                  NUMBER: 10 
- *               ]
- *        ]
- * 
- * 
+                   STRING: "Hello" , 
+                   NUMBER: 10 
+                ]
+         ]
+   
  * 
  * EINAI ------> ListObject <
  *                          Object { valueNumber = 20;}
@@ -64,5 +67,5 @@
  *                                      Object {  valueNumber = 10;     }                                      
  *                                        >
  *                          >
- * */
+*/
  
