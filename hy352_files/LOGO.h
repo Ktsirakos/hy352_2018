@@ -1,13 +1,15 @@
 //here it will be the librady for the cpps
 
-#define START_PROGRAMM using namespace std; int main (){ 
+#define START_PROGRAMM using namespace std; int main (){\
+    nothing( 
+
 #define END_PROGRAMM ;return 0; }
 
-#define WORD   false ?  "u should'n see this message" 
-#define MAKE ;auto
-#define PRINT(x) ;cout << x << endl
+#define WORD   Object(false ? "u should'n see this message" 
+#define MAKE );Objects* 
+#define PRINT(x) );cout << x << endl
 
-#define NUMBER false ?  -0.0000999 
+#define NUMBER (Objects*) new NumberObject((false)?  -10000
 
 
 #define BOOLEAN false? false 
@@ -17,38 +19,66 @@
 
 
 #include <vector>
+#include <string>
+#include <sstream>
 
 
+using namespace std;
 class Objects {
-  
-       string      valueString;
-       int         valueNumber;
-       bool        valueBool;
-       string      id;
-       ListObject  list;
- 
+private:
+    string id;
+public:
+
+       void setId(string Id){
+           id = Id;
+       }
+
+       string getId(){
+           return id;
+       }
+
+        void setIdvalue(string Id){
+            id = Id;
+        }
+
+        virtual void setId(){
+          id = "Objects";
+        }
+        Objects(string Id){};
+        
 };
 
 
 class NumberObject : public Objects {
+private:
+        double x;
+public:
+    void setX(double _x){
+        x = _x;
+    }
 
+    int getX(){
+        return x;
+    }
+
+    void setId(){
+        setIdvalue("number");
+    }
+
+    NumberObject(double _x){ x = _x; setId(); };
 };
 
-class WordObject : public Objects {
 
-};
+ostream& operator<< (ostream& output , Objects* object){
 
-class BooleanObject : public Objects {
-
-};
-
-class ListObject{
- 
-      vector < Objects > list;
-};
-  
- 
-
+    if(object->getId() == "number"){
+        cout << "in here!" << endl;
+        NumberObject* toreturn = dynamic_cast<NumberObject*>(object);
+        output << toreturn->getX() << endl;
+    }
+    return output;
+}
+ void nothing(){}
  
  /*  
  *  LIST [ 
