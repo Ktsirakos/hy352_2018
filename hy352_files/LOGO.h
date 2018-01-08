@@ -114,18 +114,17 @@ public:
     }
 };
 
-//Myvector operator,(Myvector myvec , Objects c){
-//    myvec.vec.push_back(c);
-//    return myvec;
-//}
-//
-//Myvector operator,(Objects a , Objects b){
-//
-//    Myvector myvec;
-//    myvec.vec.push_back(a);
-//    myvec.vec.push_back(b);
-//    return myvec;
-//}
+vector<Objects>  operator,(vector<Objects>  myvec , Objects c){
+   myvec.push_back(c);
+   return myvec;
+}
+
+vector<Objects>  operator,(Objects a , Objects b){
+   vector<Objects>  myvec;
+   myvec.push_back(a);
+   myvec.push_back(b);
+   return myvec;
+}
 
 //void func(Myvector myvec){
 //    cout << "constructor" << endl;
