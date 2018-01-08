@@ -12,9 +12,11 @@
  
 START_PROGRAMM
 
-    ;cout << "Hello FRom here!" << endl
-    MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
-
+    //;cout << "Hello FRom here!" << endl
+    //MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
+    //PRINT( 1 , 3 , 4);
+    MAKE number = NUMBER: 21
+    PRINT(number)
 END_PROGRAMM
 
 //just an addition

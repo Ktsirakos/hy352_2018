@@ -17,6 +17,9 @@
 #define TRUE true 
 #define FALSE false
 
+#define SENTENCE(x) func(x)
+
+
 
 
 #include <vector>
@@ -89,7 +92,10 @@ public:
 
         virtual void setId(){};
 
-        Objects(string Id){};
+        Objects operator= (double x){
+            cout << "In here tooo" << endl;
+            return Objects();
+        }
 
         Objects(double Id){ 
             cout << "In here to2oo" << endl;
@@ -102,6 +108,29 @@ public:
         Objects(){};
         
 };
+
+
+vector<Objects> operator,(vector<Objects> vec , Objects c){
+    vec.push_back(c);
+    return vec;
+}
+
+vector<Objects> operator,(Objects a , Objects b){
+    vector<Objects> vec;
+    vec.push_back(a);
+    vec.push_back(b);
+    return vec;
+}
+
+
+
+void func(vector<Objects> x){
+    
+    cout << " got in here !" << endl;
+    
+    
+}
+
 
 class NumberObject : public Objects {
 public:
