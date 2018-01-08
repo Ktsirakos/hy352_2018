@@ -1,16 +1,14 @@
 //here it will be the librady for the cpps
 
 #define START_PROGRAMM using namespace std; int main (){\
-    nothing( 
 
 #define END_PROGRAMM ;return 0; }
 
 #define WORD   Object(false ? "u should'n see this message" 
-#define MAKE );Objects* 
-#define PRINT(x) );cout << x << endl
+#define MAKE ;Objects 
+#define PRINT(x) ;cout << x << endl
 
-#define NUMBER (Objects*) new NumberObject((false)?  -10000
-
+#define NUMBER *( new NumberObject()) = 0?  -10000
 
 #define BOOLEAN false? false 
 #define TRUE true 
@@ -24,9 +22,54 @@
 
 
 using namespace std;
+
+class NumberObject;
+
+
 class Objects {
 private:
     string id;
+    string word;
+    double number;
+    bool boolean;
+    vector<Objects> list;
+
+protected:
+
+    void setNumber(double x){
+        number = x;
+    }
+
+
+    void setWord(string x){
+        word = x;
+    }
+
+    void setBoolean(bool x){
+        boolean = x;
+    }
+
+    void setList(vector<Objects> x){
+        list = x;
+    }
+
+    double getNUmber(){
+       return number;
+    }
+
+
+    string getWord(){
+        return word;
+    }
+
+    bool getBoolean(){
+        return boolean ;
+    }
+
+    vector<Objects> getList(){
+        return list;
+    }
+
 public:
 
        void setId(string Id){
@@ -41,44 +84,71 @@ public:
             id = Id;
         }
 
-        virtual void setId(){
-          id = "Objects";
+        virtual void setId(){};
+
+        Objects operator= (double x){
+            cout << "In here tooo" << endl;
         }
+
         Objects(string Id){};
+        Objects(double Id){ 
+            cout << "In here to2oo" << endl;
+        }
+
+        Objects(NumberObject* object){
+            cout << " got in here !" << endl;
+        }
+
+        Objects(){};
         
 };
 
 
 class NumberObject : public Objects {
-private:
-        double x;
 public:
-    void setX(double _x){
-        x = _x;
-    }
-
-    int getX(){
-        return x;
-    }
-
     void setId(){
         setIdvalue("number");
     }
 
-    NumberObject(double _x){ x = _x; setId(); };
+    double GetValue(){
+        return getNUmber();
+    }
+
+
+    NumberObject(double _x){ cout << "In here" << endl; setNumber(_x); setId(); };
+    NumberObject(){  
+        setId(); 
+        };
+
 };
 
 
-ostream& operator<< (ostream& output , Objects* object){
-
-    if(object->getId() == "number"){
-        cout << "in here!" << endl;
-        NumberObject* toreturn = dynamic_cast<NumberObject*>(object);
-        output << toreturn->getX() << endl;
+class WordObject : public Objects {
+public:
+    void setId(){
+        setIdvalue("word");
     }
+
+    string GetValue(){
+        return getWord();
+    }
+
+    WordObject(string _x){ setWord(_x); setId(); };
+    WordObject(){  
+        setId(); 
+        };
+
+};
+
+
+ostream& operator<< (ostream& output , Objects object){
+
+    output << "in here!" << endl;
     return output;
 }
- void nothing(){}
+
+
+
  
  /*  
  *  LIST [ 

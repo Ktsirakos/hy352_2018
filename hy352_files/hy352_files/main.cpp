@@ -9,14 +9,12 @@
 #include <iostream>
 #include <string>
 #include "../LOGO.h"
-
+ 
 START_PROGRAMM
 
-    MAKE integer = NUMBER:20
-    PRINT(integer)
+    ;cout << "Hello FRom here!" << endl
+    MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
+
 END_PROGRAMM
-
-
-
 
 //just an addition
