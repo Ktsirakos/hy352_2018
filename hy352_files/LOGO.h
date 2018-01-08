@@ -1,5 +1,11 @@
 //here it will be the librady for the cpps
 
+
+#include <stdarg.h>
+#include <vector>
+#include <string>
+#include <sstream>
+
 #define START_PROGRAMM using namespace std; int main (){ \
                                                         void nothing(); \
                                                         vector<Objects> dummy
@@ -17,7 +23,7 @@
 #define TRUE true 
 #define FALSE false
 
-#define SENTENCE(x) func(x)
+#define SENTENCE func
 
 #include <vector>
 #include <string>
@@ -99,21 +105,57 @@ public:
         
 };
 
-
-vector<Objects> operator,(vector<Objects> vec , Objects c){
-    vec.push_back(c);
-    return vec;
-}
-
-vector<Objects> operator,(Objects a , Objects b){
+class Myvector {
+public:
     vector<Objects> vec;
-    vec.push_back(a);
-    vec.push_back(b);
-    return vec;
+    
+    Myvector(){
+        
+    }
+};
+
+//Myvector operator,(Myvector myvec , Objects c){
+//    myvec.vec.push_back(c);
+//    return myvec;
+//}
+//
+//Myvector operator,(Objects a , Objects b){
+//
+//    Myvector myvec;
+//    myvec.vec.push_back(a);
+//    myvec.vec.push_back(b);
+//    return myvec;
+//}
+
+//void func(Myvector myvec){
+//    cout << "constructor" << endl;
+//
+//
+//}
+
+Myvector myvec;
+
+template<typename T>
+Myvector func(T a) {
+    // In real-world code, we wouldn't compare floating point values like
+    // this. It would make sense to specialize this function for floating
+    // point types to use approximate comparison.
+    //Myvector myvec;
+    myvec.vec.push_back(a);
+//    PRINT(a);
+    
+    return myvec;
+
 }
 
+template<typename T, typename... Args>
+Myvector func(T a, Args... args) {
 
-
+    //Myvector myvec;
+    myvec.vec.push_back(a);
+//    PRINT(a);
+    return  func(args...);
+}
 
 
 class NumberObject : public Objects {
@@ -270,22 +312,5 @@ void nothing(){
 }
 
  
- /*  
- *  LIST [ 
- *          NUMBER:20 , 
- *          LIST [ 
-                   STRING: "Hello" , 
-                   NUMBER: 10 
-                ]
-         ]
-   
- * 
- * EINAI ------> ListObject <
- *                          Object { valueNumber = 20;}
- *                          ListObject < 
- *                                      Object {  valueString = "Hello";}
- *                                      Object {  valueNumber = 10;     }                                      
- *                                        >
- *                          >
-*/
+
  
