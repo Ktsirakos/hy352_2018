@@ -19,17 +19,12 @@
 
 #define SENTENCE(x) func(x)
 
-
-
-
 #include <vector>
 #include <string>
 #include <sstream>
 
 
 using namespace std;
-
-class NumberObject;
 
 
 class Objects {
@@ -92,17 +87,11 @@ public:
 
         virtual void setId(){};
 
-        Objects operator= (double x){
-            cout << "In here tooo" << endl;
-            return Objects();
-        }
-
-        Objects(double Id){ 
-            cout << "In here to2oo" << endl;
-        }
 
         Objects(vector<Objects> _array){
-            id = "array";
+            if(id != "list"){
+                id = "array";
+            }
             list = _array;
         }
 
@@ -125,12 +114,6 @@ vector<Objects> operator,(Objects a , Objects b){
 
 
 
-void func(vector<Objects> x){
-    
-    cout << " got in here !" << endl;
-    
-    
-}
 
 
 class NumberObject : public Objects {
@@ -203,12 +186,8 @@ public:
         return getList();
     }
 
-    vector<Objects> operator[] (vector<Objects> contents){
-            cout << "GOT IN HERE" << endl;
-    }
-
-    ListObject operator= (vector<Objects> contents){
-
+    ListObject operator[] (vector<Objects> contents){
+            return ListObject(contents);
     }
 
     ListObject(vector<Objects> _list){ setList(_list); setId(); }
@@ -233,7 +212,8 @@ public:
         return getList();
     }
 
-    ArrayObject(){ setList(vec); setId(); }
+
+    ArrayObject(){ setId(); }
 
 
 };
@@ -253,6 +233,20 @@ ostream& operator<< (ostream& output , Objects object){
         output << boolean->GetValue();
     }else if(object.getId() == "array"){
         ArrayObject* array = static_cast<ArrayObject*>(&object);
+        for(int i = 0; i < array->GetValue().size(); i++){
+            if(array->GetValue()[i].getId() == "number"){
+                NumberObject* number = static_cast<NumberObject*>(&array->GetValue()[i]);
+                output << "\t" << number->GetValue() << endl;
+            }else if(array->GetValue()[i].getId() == "word"){
+                WordObject* word = static_cast<WordObject*>(&array->GetValue()[i]);
+                output << "\t" << word->GetValue() << endl;
+            }else if(array->GetValue()[i].getId() == "boolean"){
+                BooleanObject* boolean = static_cast<BooleanObject*>(&array->GetValue()[i]);
+                output << "\t" <<  boolean->GetValue() << endl;
+            }
+        }
+    }else if(object.getId() == "list"){
+        ListObject* array = static_cast<ListObject*>(&object);
         for(int i = 0; i < array->GetValue().size(); i++){
             if(array->GetValue()[i].getId() == "number"){
                 NumberObject* number = static_cast<NumberObject*>(&array->GetValue()[i]);

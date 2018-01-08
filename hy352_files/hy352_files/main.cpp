@@ -15,12 +15,13 @@ START_PROGRAMM
     MAKE integer =  NUMBER:20
     MAKE word = WORD: "Hello i am here!"
     MAKE boolean = BOOLEAN: TRUE;
-    cout << "Hello" << endl;
-    MAKE array =  (*(new ArrayObject())).vec  = { NUMBER:20 , NUMBER:12};
+    MAKE list = LIST [ NUMBER:10 , NUMBER:20];
+    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12};
     cout << integer <<  endl;
     cout << word << endl;
     cout << boolean << endl;
     cout << array << endl;
+    cout << list << endl;
 
 END_PROGRAMM
 
