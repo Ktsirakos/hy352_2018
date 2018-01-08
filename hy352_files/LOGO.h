@@ -1,16 +1,19 @@
 //here it will be the librady for the cpps
 
-#define START_PROGRAMM using namespace std; int main (){\
-
+#define START_PROGRAMM using namespace std; int main (){ \
+                                                        void nothing(); \
+                                                        vector<Objects> dummy
 #define END_PROGRAMM ;return 0; }
 
-#define WORD   Object(false ? "u should'n see this message" 
+#define WORD   *(new WordObject()) = false? "u should'n see this message" 
 #define MAKE ;Objects 
 #define PRINT(x) ;cout << x << endl
 
-#define NUMBER *( new NumberObject()) = 0?  -10000
+#define NUMBER *(new NumberObject()) = 0?  -10000
 
-#define BOOLEAN false? false 
+#define BOOLEAN *(new BooleanObject()) =false? false 
+#define LIST    (*(new ListObject())) 
+#define ARRAY  dummy = 
 #define TRUE true 
 #define FALSE false
 
@@ -86,23 +89,19 @@ public:
 
         virtual void setId(){};
 
-        Objects operator= (double x){
-            cout << "In here tooo" << endl;
-        }
-
         Objects(string Id){};
+
         Objects(double Id){ 
             cout << "In here to2oo" << endl;
         }
 
-        Objects(NumberObject* object){
-            cout << " got in here !" << endl;
+        Objects(vector<Objects> _array){
+            cout << "constructor" << endl;
         }
 
         Objects(){};
         
 };
-
 
 class NumberObject : public Objects {
 public:
@@ -115,7 +114,7 @@ public:
     }
 
 
-    NumberObject(double _x){ cout << "In here" << endl; setNumber(_x); setId(); };
+    NumberObject(double _x){ setNumber(_x); setId(); };
     NumberObject(){  
         setId(); 
         };
@@ -134,20 +133,117 @@ public:
     }
 
     WordObject(string _x){ setWord(_x); setId(); };
+
+    WordObject(const  char* x){
+        setWord(string(x));
+        setId();
+    }
+
     WordObject(){  
         setId(); 
         };
 
 };
 
+class BooleanObject : public Objects {
+public:
+    void setId(){
+        setIdvalue("boolean");
+    }
 
+    bool GetValue(){
+        return getBoolean();
+    }
+
+    BooleanObject(bool _x){ setBoolean(_x); setId(); };
+
+    BooleanObject(){  
+        setId(); 
+        };
+};
+
+
+class ListObject : public Objects {
+public:
+    void setId(){
+        setIdvalue("list");
+    }
+
+    vector<Objects> GetValue(){
+        return getList();
+    }
+
+    vector<Objects> operator[] (vector<Objects> contents){
+            cout << "GOT IN HERE" << endl;
+    }
+
+    ListObject operator= (vector<Objects> contents){
+
+    }
+
+    ListObject(vector<Objects> _list){ setList(_list); setId(); }
+    
+    ListObject(){
+        setId();
+    }
+
+};
+
+
+class ArrayObject : public Objects {
+public:
+    void setId(){
+        setIdvalue("array");
+    }
+
+    vector<Objects> GetValue(){
+        return getList();
+    }
+
+    ListObject operator= (vector<Objects> contents){
+
+    }
+
+    ArrayObject(vector<Objects> _list){ setList(_list); setId(); }
+    
+    ArrayObject(){
+        setId();
+    }
+
+};
 ostream& operator<< (ostream& output , Objects object){
 
-    output << "in here!" << endl;
+
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        output << number->GetValue();
+    }else if(object.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        output << word->GetValue();
+    }else if(object.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        output << boolean->GetValue();
+    }
     return output;
 }
 
 
+vector<Objects> operator,(vector<Objects> vec , Objects c){
+    vec.push_back(c);
+    return vec;
+}
+
+vector<Objects> operator,(Objects a , Objects b){
+    vector<Objects> vec;
+    vec.push_back(a);
+    vec.push_back(b);
+    return vec;
+}
+
+
+void nothing(){
+    //den kanw tipota
+}
 
  
  /*  
