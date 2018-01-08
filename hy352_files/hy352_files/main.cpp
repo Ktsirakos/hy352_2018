@@ -12,11 +12,16 @@
  
 START_PROGRAMM
 
-    //;cout << "Hello FRom here!" << endl
-    //MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
-    //PRINT( 1 , 3 , 4);
-    MAKE number = NUMBER: 21
-    PRINT(number)
+    MAKE integer =  NUMBER:20
+    MAKE word = WORD: "Hello i am here!"
+    MAKE boolean = BOOLEAN: TRUE;
+    cout << "Hello" << endl;
+    MAKE array =  (*(new ArrayObject())).vec  = { NUMBER:20 , NUMBER:12};
+    cout << integer <<  endl;
+    cout << word << endl;
+    cout << boolean << endl;
+    cout << array << endl;
+
 END_PROGRAMM
 
 //just an addition

@@ -13,7 +13,7 @@
 
 #define BOOLEAN *(new BooleanObject()) =false? false 
 #define LIST    (*(new ListObject())) 
-#define ARRAY  dummy = 
+#define ARRAY  (*(new ArrayObject())).vec  = 
 #define TRUE true 
 #define FALSE false
 
@@ -102,7 +102,8 @@ public:
         }
 
         Objects(vector<Objects> _array){
-            cout << "constructor" << endl;
+            id = "array";
+            list = _array;
         }
 
         Objects(){};
@@ -221,6 +222,9 @@ public:
 
 class ArrayObject : public Objects {
 public:
+
+    vector<Objects> vec;
+
     void setId(){
         setIdvalue("array");
     }
@@ -229,17 +233,12 @@ public:
         return getList();
     }
 
-    ListObject operator= (vector<Objects> contents){
+    ArrayObject(){ setList(vec); setId(); }
 
-    }
-
-    ArrayObject(vector<Objects> _list){ setList(_list); setId(); }
-    
-    ArrayObject(){
-        setId();
-    }
 
 };
+
+
 ostream& operator<< (ostream& output , Objects object){
 
 
@@ -252,21 +251,23 @@ ostream& operator<< (ostream& output , Objects object){
     }else if(object.getId() == "boolean"){
         BooleanObject* boolean = static_cast<BooleanObject*>(&object);
         output << boolean->GetValue();
+    }else if(object.getId() == "array"){
+        ArrayObject* array = static_cast<ArrayObject*>(&object);
+        for(int i = 0; i < array->GetValue().size(); i++){
+            if(array->GetValue()[i].getId() == "number"){
+                NumberObject* number = static_cast<NumberObject*>(&array->GetValue()[i]);
+                output << "\t" << number->GetValue() << endl;
+            }else if(array->GetValue()[i].getId() == "word"){
+                WordObject* word = static_cast<WordObject*>(&array->GetValue()[i]);
+                output << "\t" << word->GetValue() << endl;
+            }else if(array->GetValue()[i].getId() == "boolean"){
+                BooleanObject* boolean = static_cast<BooleanObject*>(&array->GetValue()[i]);
+                output << "\t" <<  boolean->GetValue() << endl;
+            }
+        }
     }
+
     return output;
-}
-
-
-vector<Objects> operator,(vector<Objects> vec , Objects c){
-    vec.push_back(c);
-    return vec;
-}
-
-vector<Objects> operator,(Objects a , Objects b){
-    vector<Objects> vec;
-    vec.push_back(a);
-    vec.push_back(b);
-    return vec;
 }
 
 
