@@ -15,13 +15,13 @@ START_PROGRAMM
     MAKE integer =  NUMBER:20
     MAKE word = WORD: "Hello i am here!"
     MAKE boolean = BOOLEAN: TRUE;
-    MAKE list = LIST [ NUMBER:10 , NUMBER:20];
-    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12};
+    MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
+    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , LIST [ WORD: "hELLO " , WORD: "WORLD"] , LIST[ WORD: "tRUEE " , WORD: "FAlsE"]};
     cout << integer <<  endl;
     cout << word << endl;
     cout << boolean << endl;
-    cout << array << endl;
     cout << list << endl;
+    cout << array << endl;
 
     //;cout << "Hello FRom here!" << endl
     //MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;

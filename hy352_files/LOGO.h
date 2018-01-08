@@ -1,7 +1,5 @@
 //here it will be the librady for the cpps
 
-
-#include <stdarg.h>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -98,63 +96,13 @@ public:
             if(id != "list"){
                 id = "array";
             }
+            
             list = _array;
         }
 
         Objects(){};
         
 };
-
-class Myvector {
-public:
-    vector<Objects> vec;
-    
-    Myvector(){
-        
-    }
-};
-
-vector<Objects>  operator,(vector<Objects>  myvec , Objects c){
-   myvec.push_back(c);
-   return myvec;
-}
-
-vector<Objects>  operator,(Objects a , Objects b){
-   vector<Objects>  myvec;
-   myvec.push_back(a);
-   myvec.push_back(b);
-   return myvec;
-}
-
-//void func(Myvector myvec){
-//    cout << "constructor" << endl;
-//
-//
-//}
-
-Myvector myvec;
-
-template<typename T>
-Myvector func(T a) {
-    // In real-world code, we wouldn't compare floating point values like
-    // this. It would make sense to specialize this function for floating
-    // point types to use approximate comparison.
-    //Myvector myvec;
-    myvec.vec.push_back(a);
-//    PRINT(a);
-    
-    return myvec;
-
-}
-
-template<typename T, typename... Args>
-Myvector func(T a, Args... args) {
-
-    //Myvector myvec;
-    myvec.vec.push_back(a);
-//    PRINT(a);
-    return  func(args...);
-}
 
 
 class NumberObject : public Objects {
@@ -260,6 +208,58 @@ public:
 };
 
 
+class Myvector {
+public:
+    vector<Objects> vec;
+    
+    Myvector(){
+        
+    }
+};
+
+vector<Objects>  operator,(vector<Objects>  myvec , Objects c){
+   myvec.push_back(c);
+   return myvec;
+}
+
+vector<Objects>  operator,(Objects a , Objects b){
+   vector<Objects>  myvec;
+   myvec.push_back(a);
+   myvec.push_back(b);
+   return myvec;
+}
+
+//void func(Myvector myvec){
+//    cout << "constructor" << endl;
+//
+//
+//}
+
+Myvector myvec;
+
+template<typename T>
+Myvector func(T a) {
+    // In real-world code, we wouldn't compare floating point values like
+    // this. It would make sense to specialize this function for floating
+    // point types to use approximate comparison.
+    //Myvector myvec;
+    myvec.vec.push_back(a);
+//    PRINT(a);
+    
+    return myvec;
+
+}
+
+template<typename T, typename... Args>
+Myvector func(T a, Args... args) {
+
+    //Myvector myvec;
+    myvec.vec.push_back(a);
+//    PRINT(a);
+    return  func(args...);
+}
+
+
 ostream& operator<< (ostream& output , Objects object){
 
 
@@ -284,6 +284,20 @@ ostream& operator<< (ostream& output , Objects object){
             }else if(array->GetValue()[i].getId() == "boolean"){
                 BooleanObject* boolean = static_cast<BooleanObject*>(&array->GetValue()[i]);
                 output << "\t" <<  boolean->GetValue() << endl;
+            }else if(array->GetValue()[i].getId() == "list"){
+                ListObject* list = static_cast<ListObject*>(&array->GetValue()[i]);
+                for(int i = 0; i < list->GetValue().size(); i++){
+                    if(list->GetValue()[i].getId() == "number"){
+                        NumberObject* number = static_cast<NumberObject*>(&list->GetValue()[i]);
+                        output << "\t" << number->GetValue() << endl;
+                    }else if(list->GetValue()[i].getId() == "word"){
+                        WordObject* word = static_cast<WordObject*>(&list->GetValue()[i]);
+                        output << "\t" << word->GetValue() << endl;
+                    }else if(list->GetValue()[i].getId() == "boolean"){
+                        BooleanObject* boolean = static_cast<BooleanObject*>(&list->GetValue()[i]);
+                        output << "\t" <<  boolean->GetValue() << endl;
+                    }
+                }
             }
         }
     }else if(object.getId() == "list"){
