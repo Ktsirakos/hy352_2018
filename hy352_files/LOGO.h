@@ -1,5 +1,11 @@
 //here it will be the librady for the cpps
 
+
+#include <stdarg.h>
+#include <vector>
+#include <string>
+#include <sstream>
+
 #define START_PROGRAMM using namespace std; int main (){ \
                                                         void nothing(); \
                                                         vector<Objects> dummy
@@ -17,14 +23,8 @@
 #define TRUE true 
 #define FALSE false
 
-#define SENTENCE(x) func(x)
+#define SENTENCE func
 
-
-
-
-#include <vector>
-#include <string>
-#include <sstream>
 
 
 using namespace std;
@@ -109,26 +109,56 @@ public:
         
 };
 
-
-vector<Objects> operator,(vector<Objects> vec , Objects c){
-    vec.push_back(c);
-    return vec;
-}
-
-vector<Objects> operator,(Objects a , Objects b){
+class Myvector {
+public:
     vector<Objects> vec;
-    vec.push_back(a);
-    vec.push_back(b);
-    return vec;
+    
+    Myvector(){
+        
+    }
+};
+
+//Myvector operator,(Myvector myvec , Objects c){
+//    myvec.vec.push_back(c);
+//    return myvec;
+//}
+//
+//Myvector operator,(Objects a , Objects b){
+//
+//    Myvector myvec;
+//    myvec.vec.push_back(a);
+//    myvec.vec.push_back(b);
+//    return myvec;
+//}
+
+//void func(Myvector myvec){
+//    cout << "constructor" << endl;
+//
+//
+//}
+
+Myvector myvec;
+
+template<typename T>
+Myvector func(T a) {
+    // In real-world code, we wouldn't compare floating point values like
+    // this. It would make sense to specialize this function for floating
+    // point types to use approximate comparison.
+    //Myvector myvec;
+    myvec.vec.push_back(a);
+//    PRINT(a);
+    
+    return myvec;
+
 }
 
+template<typename T, typename... Args>
+Myvector func(T a, Args... args) {
 
-
-void func(vector<Objects> x){
-    
-    cout << " got in here !" << endl;
-    
-    
+    //Myvector myvec;
+    myvec.vec.push_back(a);
+//    PRINT(a);
+    return  func(args...);
 }
 
 
@@ -202,13 +232,13 @@ public:
         return getList();
     }
 
-    vector<Objects> operator[] (vector<Objects> contents){
-            cout << "GOT IN HERE" << endl;
-    }
-
-    ListObject operator= (vector<Objects> contents){
-
-    }
+//    vector<Objects> operator[] (vector<Objects> contents){
+//            cout << "GOT IN HERE" << endl;
+//    }
+//
+//    ListObject operator= (vector<Objects> contents){
+//
+//    }
 
     ListObject(vector<Objects> _list){ setList(_list); setId(); }
     
@@ -229,9 +259,9 @@ public:
         return getList();
     }
 
-    ListObject operator= (vector<Objects> contents){
-
-    }
+//    ListObject operator= (vector<Objects> contents){
+//
+//    }
 
     ArrayObject(vector<Objects> _list){ setList(_list); setId(); }
     
@@ -257,17 +287,6 @@ ostream& operator<< (ostream& output , Objects object){
 }
 
 
-vector<Objects> operator,(vector<Objects> vec , Objects c){
-    vec.push_back(c);
-    return vec;
-}
-
-vector<Objects> operator,(Objects a , Objects b){
-    vector<Objects> vec;
-    vec.push_back(a);
-    vec.push_back(b);
-    return vec;
-}
 
 
 void nothing(){
@@ -275,22 +294,5 @@ void nothing(){
 }
 
  
- /*  
- *  LIST [ 
- *          NUMBER:20 , 
- *          LIST [ 
-                   STRING: "Hello" , 
-                   NUMBER: 10 
-                ]
-         ]
-   
- * 
- * EINAI ------> ListObject <
- *                          Object { valueNumber = 20;}
- *                          ListObject < 
- *                                      Object {  valueString = "Hello";}
- *                                      Object {  valueNumber = 10;     }                                      
- *                                        >
- *                          >
-*/
+
  
