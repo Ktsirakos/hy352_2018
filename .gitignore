@@ -11,3 +11,7 @@ hy352_files/hy352_files/a.exe
 test2.cpp
 hy352_files/hy352_files/a.exe.stackdump
 a.exe
+
+\.vscode/launch\.json
+
+\.vscode/
