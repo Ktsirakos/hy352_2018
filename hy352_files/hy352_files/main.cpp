@@ -45,6 +45,12 @@ MAKE array2 = ARRAY {
 PRINT(array2);
 MAKE booloflife = SENTENCE(WORD:"Never stop believing" , WORD: " " , WORD: "TO U!!")
 PRINT(booloflife)
+
+
+MAKE g = ITEM(1 , array2);
+MAKE j = SETITEM(2 , array2 ,  NUMBER:30)
+PRINT(g)
+PRINT(j)
 END_PROGRAMM
 
 //just an addition
