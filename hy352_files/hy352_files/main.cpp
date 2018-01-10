@@ -41,31 +41,22 @@ MAKE array2 = ARRAY {
          } 
     }
 
-MAKE j= ΙΤΕΜ (7, array)
+MAKE j= ITEM (7, array2)
 PRINT(j);
 cout<<"thanos"<<endl;
 
 
-MAKE g= SETΙΤΕΜ (3, array, NUMBER:1)
-MAKE c= SETΙΤΕΜ (4 , array , NUMBER:20)
+MAKE g= SETITEM (3, array2, NUMBER:1)
+MAKE c= SETITEM (4 , array2, NUMBER:20)
 PRINT(g);
 PRINT(c);
-
-
-
-
-
-
-    
 PRINT(array2);
+
+
 MAKE booloflife = SENTENCE(WORD:"Never stop believing" , WORD: " " , WORD: "TO U!!")
 PRINT(booloflife)
 
-
-MAKE g = ITEM(1 , array2);
-MAKE j = SETITEM(2 , array2 ,  NUMBER:30)
-PRINT(g)
-PRINT(j)
+PRINT(j2)
 END_PROGRAMM
 
 //just an addition
