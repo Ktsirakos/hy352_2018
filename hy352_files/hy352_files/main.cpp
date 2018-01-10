@@ -18,7 +18,7 @@ START_PROGRAMM
     MAKE word = WORD: "Hello i am here!"
     MAKE boolean = BOOLEAN: TRUE;
     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
-    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , LIST [ WORD: "hELLO " , WORD: "WORLD"] , LIST[ WORD: "tRUEE " , WORD: "FAlsE"]};
+MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
     cout << integer <<  endl;
     cout << word << endl;
     cout << boolean << endl;
@@ -33,10 +33,12 @@ START_PROGRAMM
     MAKE string = WORD:"aaa";
     //PRINT(string);
 MAKE vector2 = SENTENCE(WORD:"aaa" , WORD:"aaw",WORD:"assss1");
+PRINT(vector2)
 
 IF AND(integer== (NUMBER:20),y== (NUMBER:30),boolean == (BOOLEAN: TRUE),word == (WORD: "Hello i am here!")) DO
 // IF AND(x==10,integer==20) DO
 PRINT(integer)
+;cout<<"i am here"<<endl;
 // END
 END
 
@@ -74,8 +76,20 @@ PRINT(v4);
 //
 //MAKE v2 = MINUS (NUMBER:12)
 //PRINT(v2);
-int g = 24/12/2;
-cout<<g<<endl;
+//int g = 24/12/2;
+//cout<<g<<endl;
+
+MAKE j= ΙΤΕΜ (7, array)
+PRINT(j);
+cout<<"thanos"<<endl;
+
+
+MAKE g= SETΙΤΕΜ (3, array, NUMBER:1)
+MAKE c= SETΙΤΕΜ (4 , array , NUMBER:20)
+PRINT(g);
+PRINT(c);
+
+
 
 
 
