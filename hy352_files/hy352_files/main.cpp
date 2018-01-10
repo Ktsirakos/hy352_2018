@@ -21,7 +21,7 @@ START_PROGRAMM
     cout << word << endl;
     cout << boolean << endl;
     cout << list << endl;
-    cout << array << endl;
+    cout << array << endl; 
 
     //;cout << "Hello FRom here!" << endl
     //MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
@@ -30,12 +30,9 @@ START_PROGRAMM
     //PRINT(number)
     MAKE string = WORD:"aaa";
     //PRINT(string);
-Myvector vector2 = SENTENCE(WORD:"aaa" , WORD:"aaw",WORD:"aa111");
+MAKE vector2 = SENTENCE(WORD:"aaa" , WORD:"aaw",WORD:"assss1");
 
-for(int i = 0; i< vector2.vec.size(); i++){
-    cout << vector2.vec[i] << endl;
-    
-}
+    cout << vector2 << endl;
 END_PROGRAMM
 
 //just an addition

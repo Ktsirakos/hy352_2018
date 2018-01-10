@@ -21,7 +21,7 @@
 #define TRUE true 
 #define FALSE false
 
-#define SENTENCE func
+#define SENTENCE (*(new SentenceObject())) = func
 
 #include <vector>
 #include <string>
@@ -103,6 +103,7 @@ public:
         Objects(){};
         
 };
+
 
 
 class NumberObject : public Objects {
@@ -203,9 +204,8 @@ public:
 
 
     ArrayObject(){ setId(); }
-
-
 };
+
 
 
 class Myvector {
@@ -216,6 +216,34 @@ public:
         
     }
 };
+
+
+class SentenceObject : public Objects {
+public:
+
+
+    vector<Objects> vec;
+    
+    void setId(){
+        setIdvalue("sentence");
+    }
+
+    vector<Objects> GetValue(){
+        return getList();
+    }
+
+
+    SentenceObject(){ setId(); }
+    SentenceObject(Myvector vec){
+
+        setId();
+        setList(vec.vec);
+    }
+
+    
+};
+
+
 
 vector<Objects>  operator,(vector<Objects>  myvec , Objects c){
    myvec.push_back(c);
@@ -238,7 +266,7 @@ vector<Objects>  operator,(Objects a , Objects b){
 Myvector myvec;
 
 template<typename T>
-Myvector func(T a) {
+Myvector  func(T a) {
     // In real-world code, we wouldn't compare floating point values like
     // this. It would make sense to specialize this function for floating
     // point types to use approximate comparison.
@@ -248,10 +276,11 @@ Myvector func(T a) {
     
     return myvec;
 
+
 }
 
 template<typename T, typename... Args>
-Myvector func(T a, Args... args) {
+Myvector   func(T a, Args... args) {
 
     //Myvector myvec;
     myvec.vec.push_back(a);
@@ -312,6 +341,16 @@ ostream& operator<< (ostream& output , Objects object){
             }else if(array->GetValue()[i].getId() == "boolean"){
                 BooleanObject* boolean = static_cast<BooleanObject*>(&array->GetValue()[i]);
                 output << "\t" <<  boolean->GetValue() << endl;
+            }
+        }
+    }else if(object.getId() == "sentence"){
+        SentenceObject* sentence = static_cast<SentenceObject*>(&object);
+        for(int i = 0; i < sentence->GetValue().size(); i++){
+            if(sentence->GetValue()[i].getId() == "word"){
+                WordObject* word = static_cast<WordObject*>(&sentence->GetValue()[i]);
+                output << "\t" << word->GetValue() << endl;
+            }else{
+                cout << "Invalid" << endl;
             }
         }
     }
