@@ -32,9 +32,8 @@
 #define END ;}
 
 
-
-#define ΙΤΕΜ geter
-#define SETΙΤΕΜ seter
+#define ITEM geter
+#define SETITEM seter
 
 #define SUM add
 #define DIFFERENCE sub

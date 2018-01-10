@@ -12,35 +12,10 @@
 #include "../LOGO.h"
  
 
-    MAKE integer =  NUMBER:20
-    MAKE x =  NUMBER:10
-    MAKE y =  NUMBER:30
-    MAKE word = WORD: "Hello i am here!"
-    MAKE boolean = BOOLEAN: TRUE;
-    MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
-MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
-    cout << integer <<  endl;
-    cout << word << endl;
-    cout << boolean << endl;
-    cout << list << endl;
-    cout << array << endl; 
+ 
 
-    //;cout << "Hello FRom here!" << endl
-    //MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
-    //PRINT( 1 , 3 , 4);
-    MAKE number = NUMBER: 21
-    //PRINT(number)
-    MAKE string = WORD:"aaa";
-    //PRINT(string);
-MAKE vector2 = SENTENCE(WORD:"aaa" , WORD:"aaw",WORD:"assss1");
-PRINT(vector2)
 
-IF AND(integer== (NUMBER:20),y== (NUMBER:30),boolean == (BOOLEAN: TRUE),word == (WORD: "Hello i am here!")) DO
-// IF AND(x==10,integer==20) DO
-PRINT(integer)
-;cout<<"i am here"<<endl;
-// END
-END
+START_PROGRAMM
 
 MAKE list1 = LIST [ NUMBER: 10 , NUMBER :20 , NUMBER:40]
 PRINT(list1)
@@ -49,13 +24,6 @@ MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27] ,  NUMBER:30]
 PRINT(list2)
 
 
-//MAKE v5 = MODULO (NUMBER:12,NUMBER:7)
-//PRINT(v5);
-//
-//MAKE v2 = MINUS (NUMBER:12)
-//PRINT(v2);
-//int g = 24/12/2;
-//cout<<g<<endl;
 MAKE array2 = ARRAY { 
     NUMBER:20 , 
     WORD:"201" , 
@@ -92,6 +60,12 @@ PRINT(c);
 PRINT(array2);
 MAKE booloflife = SENTENCE(WORD:"Never stop believing" , WORD: " " , WORD: "TO U!!")
 PRINT(booloflife)
+
+
+MAKE g = ITEM(1 , array2);
+MAKE j = SETITEM(2 , array2 ,  NUMBER:30)
+PRINT(g)
+PRINT(j)
 END_PROGRAMM
 
 //just an addition
