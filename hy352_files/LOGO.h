@@ -32,6 +32,10 @@
 #define END ;}
 
 
+
+#define ΙΤΕΜ geter
+#define SETΙΤΕΜ seter
+
 #define SUM add
 #define DIFFERENCE sub
 #define PRODUCT mul
@@ -113,6 +117,13 @@ public:
 
         virtual void setId(){};
 
+        static void CopyObject(Objects* dest , Objects a){
+            dest->id = a.id;
+            dest->word = a.word;
+            dest->number = a.number;
+            dest->boolean = a.boolean;
+            dest->list = a.list;
+        }
 
         Objects(vector<Objects> _array){
             if(id != "list"){
@@ -131,6 +142,7 @@ public:
 
 
 
+
 class NumberObject : public Objects {
 public:
     void setId(){
@@ -141,6 +153,9 @@ public:
         return getNUmber();
     }
 
+    void setValue(double x){
+        setNumber(x);
+    }
 
     NumberObject(double _x){ setNumber(_x); setId(); };
     NumberObject(){  
@@ -191,6 +206,7 @@ public:
 };
 
 
+
 class ListObject : public Objects {
 public:
     void setId(){
@@ -223,6 +239,9 @@ public:
         setIdvalue("array");
     }
 
+    void setValue(vector<Objects> vec){
+        setList(vec);
+    }
     vector<Objects> GetValue(){
         return getList();
     }
@@ -501,6 +520,16 @@ NumberObject operator% (NumberObject object , Objects x){
 
 }
 
+
+//NumberObject operator= (NumberObject object , NumberObject x){
+//
+//    //NumberObject* number = static_cast<NumberObject*>(&x);
+//    NumberObject x3=*(new NumberObject(object.GetValue()=x.GetValue()) );
+//    return x3;
+//
+//}
+
+
 NumberObject mini (NumberObject object ){
     
     
@@ -560,6 +589,8 @@ public:
 
 
 
+
+
 vector<Objects>  operator,(vector<Objects>  myvec , Objects c){
    myvec.push_back(c);
    return myvec;
@@ -598,9 +629,7 @@ Myvector myvec;
 
 template<typename T>
 Myvector  func(T a) {
-    // In real-world code, we wouldn't compare floating point values like
-    // this. It would make sense to specialize this function for floating
-    // point types to use approximate comparison.
+
     //Myvector myvec;
     myvec.vec.push_back(a);
 //    PRINT(a);
@@ -668,6 +697,59 @@ ostream& PrintLists(ostream& output , ListObject* list){
             }
     }
 }
+
+
+template<typename T, typename T1>
+Objects   geter(T a, T1 b) {
+    Objects obj;
+    ArrayObject* array = static_cast<ArrayObject*>(&b);
+    PRINT(a);
+    PRINT(array->GetValue().size());
+    
+    for(int i=0;i<array->GetValue().size();i++){
+        //cout<<"for"<<endl;
+        
+        if(i==a-1){
+            //cout<<"mphka"<<endl;
+            //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
+           // cout<<array->GetValue()<<endl;
+            return array->GetValue()[i];
+        }
+    }
+    return obj;
+}
+
+
+Objects   seter(int  a, Objects b, Objects c) {
+    Objects obj;
+    ArrayObject* array = static_cast<ArrayObject*>(&b);
+    for(int i=0;i<array->GetValue().size();i++){
+        if(i==a-1){
+            if(c.getId() == "number"){
+                
+                if(array->GetValue()[i].getId() == "number"){
+                    NumberObject* num = static_cast<NumberObject*>(&c);
+                    NumberObject* tochange = static_cast<NumberObject*>(&array->GetValue()[i]);
+                    tochange->setValue(num->GetValue());
+                    //cout<<array->GetValue()[i]<<endl;
+                    return *tochange;
+                }else if(array->GetValue()[i].getId() == "word"){
+                    
+                    vector<Objects> vec = array->GetValue();
+                    Objects::CopyObject(&vec[i] , c);
+                    array->setValue(vec);
+                    return array->GetValue()[i];
+                }
+            }
+        
+        }
+    }
+    return obj;
+    
+}
+
+
+
 
 
 ostream& operator<< (ostream& output , Objects object){
