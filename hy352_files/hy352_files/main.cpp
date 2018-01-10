@@ -12,17 +12,39 @@
 #include "../LOGO.h"
  
 
+ 
+
+
 START_PROGRAMM
 
 MAKE list1 = LIST [ NUMBER: 10 , NUMBER :20 , NUMBER:40]
 PRINT(list1)
 
-MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27 ,  NUMBER:134 , NUMBER: 120  ] , LIST [ NUMBER3 , NUMBER4] ]
+MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27] ,  NUMBER:30]
 PRINT(list2)
 
 
+MAKE array2 = ARRAY { 
+    NUMBER:20 , 
+    WORD:"201" , 
+    LIST [ 
+            NUMBER:205 , 
+            LIST [ 
+                    WORD: "I owned you" , 
+                    NUMBER:31
+                ]
+        ] , 
+    ARRAY { 
+        NUMBER:123 ,
+         NUMBER: 456 , 
+         WORD: "teleiwsa"
+         } 
+    }
 
+    
+PRINT(array2);
 MAKE booloflife = SENTENCE(WORD:"Never stop believing" , WORD: " " , WORD: "TO U!!")
+PRINT(booloflife)
 END_PROGRAMM
 
 //just an addition

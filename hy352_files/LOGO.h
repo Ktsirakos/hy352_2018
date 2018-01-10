@@ -621,33 +621,49 @@ Myvector   func(T a, Args... args) {
 
 
 string delim = "\t";
+
+ostream& PrintLists(ostream& output , ListObject* list);
+
+
+ostream& PrintArray(ostream& output , ArrayObject* array){
+
+    vector<Objects> vec = array->GetValue();
+        for(int i = 0; i < vec.size(); i++){
+            if(vec[i].getId() == "number"){
+                NumberObject* number = static_cast<NumberObject*>(&vec[i]);
+                output << "\t" << number->GetValue() << endl;
+            }else if(vec[i].getId() == "word"){
+                WordObject* word = static_cast<WordObject*>(&vec[i]);
+                output << "\t" << word->GetValue() << endl;
+            }else if(vec[i].getId() == "boolean"){
+                BooleanObject* boolean = static_cast<BooleanObject*>(&vec[i]);
+                output << "\t" <<  boolean->GetValue() << endl;
+            }else if(vec[i].getId() == "list"){
+                ListObject* list = static_cast<ListObject*>(&vec[i]);
+                PrintLists(output , list);
+            }else if(vec[i].getId() == "array"){
+                ArrayObject* arraynew = static_cast<ArrayObject*>(&vec[i]);
+                PrintArray(output , arraynew);
+            }
+        }
+}
+
+
 ostream& PrintLists(ostream& output , ListObject* list){
 
         vector<Objects> vec = list->GetValue();
         for(int i = 0; i < vec.size(); i++){
             if(vec[i].getId() == "number"){
                 NumberObject* number = static_cast<NumberObject*>(&vec[i]);
-                output << delim << number->GetValue() << endl;
+                output << "\t" << number->GetValue() << endl;
             }else if(vec[i].getId() == "word"){
                 WordObject* word = static_cast<WordObject*>(&vec[i]);
-                output << delim << word->GetValue() << endl;
+                output << "\t" << word->GetValue() << endl;
             }else if(vec[i].getId() == "boolean"){
                 BooleanObject* boolean = static_cast<BooleanObject*>(&vec[i]);
-                output << delim <<  boolean->GetValue() << endl;
+                output << "\t" <<  boolean->GetValue() << endl;
             }else if(vec[i].getId() == "list"){
                 ListObject* newlist = static_cast<ListObject*>(&vec[i]);
-            //     if(newlist->GetValue()[i].getId() == "number"){
-            //         NumberObject* number = static_cast<NumberObject*>(&newlist->GetValue()[i]);
-            //         output << "\t" << number->GetValue() << endl;
-            //     }else if(newlist->GetValue()[i].getId() == "word"){
-            //         WordObject* word = static_cast<WordObject*>(&newlist->GetValue()[i]);
-            //         output << "\t" << word->GetValue() << endl;
-            //     }else if(newlist->GetValue()[i].getId() == "boolean"){
-            //         BooleanObject* boolean = static_cast<BooleanObject*>(&newlist->GetValue()[i]);
-            //         output << "\t" <<  boolean->GetValue() << endl;
-            //     }
-            // }
-                delim += "\t";
                 PrintLists(output , newlist);
             }
     }
@@ -668,34 +684,6 @@ ostream& operator<< (ostream& output , Objects object){
         output << boolean->GetValue();
     }else if(object.getId() == "array"){
         ArrayObject* array = static_cast<ArrayObject*>(&object);
-        for(int i = 0; i < array->GetValue().size(); i++){
-            if(array->GetValue()[i].getId() == "number"){
-                NumberObject* number = static_cast<NumberObject*>(&array->GetValue()[i]);
-                output << "\t" << number->GetValue() << endl;
-            }else if(array->GetValue()[i].getId() == "word"){
-                WordObject* word = static_cast<WordObject*>(&array->GetValue()[i]);
-                output << "\t" << word->GetValue() << endl;
-            }else if(array->GetValue()[i].getId() == "boolean"){
-                BooleanObject* boolean = static_cast<BooleanObject*>(&array->GetValue()[i]);
-                output << "\t" <<  boolean->GetValue() << endl;
-            }else if(array->GetValue()[i].getId() == "list"){
-                ListObject* list = static_cast<ListObject*>(&array->GetValue()[i]);
-                for(int i = 0; i < list->GetValue().size(); i++){
-                    if(list->GetValue()[i].getId() == "number"){
-                        NumberObject* number = static_cast<NumberObject*>(&list->GetValue()[i]);
-                        output << "\t" << number->GetValue() << endl;
-                    }else if(list->GetValue()[i].getId() == "word"){
-                        WordObject* word = static_cast<WordObject*>(&list->GetValue()[i]);
-                        output << "\t" << word->GetValue() << endl;
-                    }else if(list->GetValue()[i].getId() == "boolean"){
-                        BooleanObject* boolean = static_cast<BooleanObject*>(&list->GetValue()[i]);
-                        output << "\t" <<  boolean->GetValue() << endl;
-                    }
-                }
-            }
-        }
-    }else if(object.getId() == "list"){
-         ListObject* list = static_cast<ListObject*>(&object);
         // for(int i = 0; i < array->GetValue().size(); i++){
         //     if(array->GetValue()[i].getId() == "number"){
         //         NumberObject* number = static_cast<NumberObject*>(&array->GetValue()[i]);
@@ -707,21 +695,26 @@ ostream& operator<< (ostream& output , Objects object){
         //         BooleanObject* boolean = static_cast<BooleanObject*>(&array->GetValue()[i]);
         //         output << "\t" <<  boolean->GetValue() << endl;
         //     }else if(array->GetValue()[i].getId() == "list"){
-        //     ListObject* newlist = static_cast<ListObject*>(&array->GetValue()[i]);
-        //         if(newlist->GetValue()[i].getId() == "number"){
-        //             NumberObject* number = static_cast<NumberObject*>(&newlist->GetValue()[i]);
-        //             output << "\t" << number->GetValue() << endl;
-        //         }else if(newlist->GetValue()[i].getId() == "word"){
-        //             WordObject* word = static_cast<WordObject*>(&newlist->GetValue()[i]);
-        //             output << "\t" << word->GetValue() << endl;
-        //         }else if(newlist->GetValue()[i].getId() == "boolean"){
-        //             BooleanObject* boolean = static_cast<BooleanObject*>(&newlist->GetValue()[i]);
-        //             output << "\t" <<  boolean->GetValue() << endl;
+        //         ListObject* list = static_cast<ListObject*>(&array->GetValue()[i]);
+        //         for(int i = 0; i < list->GetValue().size(); i++){
+        //             if(list->GetValue()[i].getId() == "number"){
+        //                 NumberObject* number = static_cast<NumberObject*>(&list->GetValue()[i]);
+        //                 output << "\t" << number->GetValue() << endl;
+        //             }else if(list->GetValue()[i].getId() == "word"){
+        //                 WordObject* word = static_cast<WordObject*>(&list->GetValue()[i]);
+        //                 output << "\t" << word->GetValue() << endl;
+        //             }else if(list->GetValue()[i].getId() == "boolean"){
+        //                 BooleanObject* boolean = static_cast<BooleanObject*>(&list->GetValue()[i]);
+        //                 output << "\t" <<  boolean->GetValue() << endl;
+        //             }
         //         }
         //     }
         // }
 
-        PrintLists(output , list);
+        PrintArray(output , array);
+    }else if(object.getId() == "list"){
+         ListObject* list = static_cast<ListObject*>(&object);
+         PrintLists(output , list);
 
     }else if(object.getId() == "sentence"){
         SentenceObject* sentence = static_cast<SentenceObject*>(&object);
