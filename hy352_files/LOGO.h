@@ -21,11 +21,33 @@
 #define TRUE true 
 #define FALSE false
 
+
+#define IF ;if(
+#define AND and_comparer
+#define OR or_comparer
+#define NOT not_comparer
+#define ELSE ;}else{
+#define ELIF ;}else if(
+#define DO ){
+#define END ;}
+
+
+#define SUM add
+#define DIFFERENCE sub
+#define PRODUCT mul
+#define QUOTIENT divi
+#define MODULO mod
+#define MINUS mini
+
+
+
+#define REPEAT ;for(int i =0  ; i<
+#define WHILE i;){} while(
+#define TIMES ;i++
+
+
 #define SENTENCE (*(new SentenceObject())) = func
 
-#include <vector>
-#include <string>
-#include <sstream>
 
 
 using namespace std;
@@ -103,6 +125,9 @@ public:
         Objects(){};
         
 };
+
+
+
 
 
 
@@ -205,6 +230,296 @@ public:
 
     ArrayObject(){ setId(); }
 };
+
+
+
+
+bool operator== (Objects object ,  NumberObject x){
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        return number->GetValue() == x.GetValue();
+    }
+    
+    return false;
+}
+
+
+bool operator== (Objects object ,  BooleanObject x){
+    if(object.getId() == "boolean"){
+        BooleanObject* number = static_cast<BooleanObject*>(&object);
+        return number->GetValue() == x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator== (Objects object ,  WordObject x){
+    if(object.getId() == "word"){
+        WordObject* number = static_cast<WordObject*>(&object);
+        return number->GetValue() == x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator> (Objects object ,  NumberObject x){
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        return number->GetValue() > x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator> (Objects object ,  WordObject x){
+    if(object.getId() == "word"){
+        WordObject* number = static_cast<WordObject*>(&object);
+        return number->GetValue() > x.GetValue();
+    }
+    
+    return false;
+}
+
+
+bool operator>= (Objects object ,  NumberObject x){
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        return number->GetValue() >= x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator>= (Objects object ,  WordObject x){
+    if(object.getId() == "word"){
+        WordObject* number = static_cast<WordObject*>(&object);
+        return number->GetValue() >= x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator<= (Objects object ,  NumberObject x){
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        return number->GetValue() <= x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator<= (Objects object ,  WordObject x){
+    if(object.getId() == "word"){
+        WordObject* number = static_cast<WordObject*>(&object);
+        return number->GetValue() <= x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator< (Objects object ,  NumberObject x){
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        return number->GetValue() < x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator< (Objects object ,  WordObject x){
+    if(object.getId() == "word"){
+        WordObject* number = static_cast<WordObject*>(&object);
+        return number->GetValue() < x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator!= (Objects object ,  NumberObject x){
+    if(object.getId() == "number"){
+        NumberObject* number = static_cast<NumberObject*>(&object);
+        return number->GetValue() != x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator!= (Objects object ,  BooleanObject x){
+    if(object.getId() == "boolean"){
+        BooleanObject* number = static_cast<BooleanObject*>(&object);
+        return number->GetValue() != x.GetValue();
+    }
+    
+    return false;
+}
+
+bool operator!= (Objects object ,  WordObject x){
+    if(object.getId() == "word"){
+        WordObject* number = static_cast<WordObject*>(&object);
+        return number->GetValue() != x.GetValue();
+    }
+    
+    return false;
+}
+
+
+
+NumberObject operator+ (NumberObject object , NumberObject x){
+    
+    NumberObject x3=*(new NumberObject(object.GetValue()+x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator+ (Objects object , NumberObject x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject x3=*(new NumberObject(number->GetValue()+x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator+ (NumberObject object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(object.GetValue()+number->GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator- (NumberObject object , NumberObject x){
+    
+    NumberObject x3=*(new NumberObject(object.GetValue()-x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator- (Objects object , NumberObject x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject x3=*(new NumberObject(number->GetValue()-x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator- (NumberObject object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(object.GetValue()-number->GetValue()) );
+    return x3;
+    
+}
+
+NumberObject operator* (NumberObject object , NumberObject x){
+    
+    NumberObject x3=*(new NumberObject(object.GetValue()*x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator* (Objects object , NumberObject x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject x3=*(new NumberObject(number->GetValue()*x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator* (NumberObject object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(object.GetValue()*number->GetValue()) );
+    return x3;
+    
+}
+
+NumberObject operator/ (NumberObject object , NumberObject x){
+    
+    NumberObject x3=*(new NumberObject(object.GetValue()/x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator/ (Objects object , NumberObject x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject x3=*(new NumberObject(number->GetValue()/x.GetValue()) );
+    return x3;
+    
+}
+
+
+NumberObject operator/ (NumberObject object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(object.GetValue()/number->GetValue()) );
+    return x3;
+    
+}
+
+NumberObject operator% (NumberObject object , NumberObject x){
+    
+    int tmp =object.GetValue();
+    int tmp1 =x.GetValue();
+    
+    NumberObject x3=*(new NumberObject(tmp%tmp1) );
+    return x3;
+
+}
+
+
+NumberObject operator% (Objects object , NumberObject x){
+
+    NumberObject* number = static_cast<NumberObject*>(&object);
+
+    int tmp =number->GetValue();
+    int tmp1 =x.GetValue();
+    NumberObject x3=*(new NumberObject(tmp % tmp1) );
+    return x3;
+
+}
+
+
+NumberObject operator% (NumberObject object , Objects x){
+    
+    
+
+    int tmp =object.GetValue();
+    NumberObject* number = static_cast<NumberObject*>(&x);
+    int tmp1 =number->GetValue();
+    //NumberObject* number = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(tmp%tmp1) );
+    return x3;
+
+}
+
+NumberObject mini (NumberObject object ){
+    
+    
+    NumberObject x3=*(new NumberObject(-object.GetValue()) );
+    return x3;
+    
+}
+
+NumberObject mini (Objects object ){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject x3=*(new NumberObject(-number->GetValue()) );
+    return x3;
+    
+}
+
+
+
+
 
 
 
@@ -363,6 +678,95 @@ void nothing(){
     //den kanw tipota
 }
 
- 
 
- 
+template<typename T>
+bool and_comparer(T a) {
+
+    return a == true;
+}
+
+template<typename T, typename... Args>
+bool and_comparer(T a, Args... args) {
+    return a == true && and_comparer(args...);
+}
+
+
+
+template<typename T>
+bool or_comparer(T a) {
+
+    return a ==true;
+}
+
+template<typename T, typename... Args>
+bool or_comparer(T a, Args... args) {
+    return a == true || or_comparer(args...);
+}
+
+
+template<typename T>
+bool not_comparer(T a) {
+
+    return a ==false;
+}
+
+template<typename T, typename... Args>
+bool not_comparer(T a, Args... args) {
+    return a == false && not_comparer(args...);
+}
+
+
+template<typename T>
+T add(T v) {
+    return v;
+}
+
+template<typename T, typename... Args>
+T add(T first, Args... args) {
+    return first + add(args...);
+}
+
+
+template<typename T>
+T sub(T v) {
+    return v;
+}
+
+template<typename T, typename... Args>
+T sub(T first, Args... args) {
+    return first - sub(args...);
+}
+
+
+template<typename T>
+T mul(T v) {
+    return v;
+}
+
+template<typename T, typename... Args>
+T mul(T first, Args... args) {
+    return first * mul(args...);
+}
+
+
+template<typename T>
+T divi(T v) {
+    return v;
+}
+
+template<typename T, typename... Args>
+T divi(T first, Args... args) {
+    return first / divi(args...);
+}
+
+template<typename T>
+T mod(T v) {
+    return v;
+}
+
+template<typename T, typename... Args>
+T mod(T first, Args... args) {
+    return first % mod(args...);
+}
+
+
