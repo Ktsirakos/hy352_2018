@@ -8,34 +8,55 @@
 #include <stdarg.h>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "../LOGO.h"
  
+
+ 
+
+
 START_PROGRAMM
 
-    MAKE integer =  NUMBER:20
-    MAKE word = WORD: "Hello i am here!"
-    MAKE boolean = BOOLEAN: TRUE;
-    MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
-    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , LIST [ WORD: "hELLO " , WORD: "WORLD"] , LIST[ WORD: "tRUEE " , WORD: "FAlsE"]};
-    cout << integer <<  endl;
-    cout << word << endl;
-    cout << boolean << endl;
-    cout << list << endl;
-    cout << array << endl;
+MAKE list1 = LIST [ NUMBER: 10 , NUMBER :20 , NUMBER:40]
+PRINT(list1)
 
-    //;cout << "Hello FRom here!" << endl
-    //MAKE integer =  *(new NumberObject()) = 0? -10000 : 20.0;
-    //PRINT( 1 , 3 , 4);
-    MAKE number = NUMBER: 21
-    //PRINT(number)
-    MAKE string = WORD:"aaa";
-    //PRINT(string);
-Myvector vector2 = SENTENCE(WORD:"aaa" , WORD:"aaw",WORD:"aa111");
+MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27] ,  NUMBER:30]
+PRINT(list2)
 
-for(int i = 0; i< vector2.vec.size(); i++){
-    cout << vector2.vec[i] << endl;
-    
-}
+
+MAKE array2 = ARRAY { 
+    NUMBER:20 , 
+    WORD:"201" , 
+    LIST [ 
+            NUMBER:205 , 
+            LIST [ 
+                    WORD: "I owned you" , 
+                    NUMBER:31
+                ]
+        ] , 
+    ARRAY { 
+        NUMBER:123 ,
+         NUMBER: 456 , 
+         WORD: "teleiwsa"
+         } 
+    }
+
+MAKE j= ITEM (7, array2)
+PRINT(j);
+cout<<"thanos"<<endl;
+
+
+MAKE g= SETITEM (3, array2, NUMBER:1)
+MAKE c= SETITEM (4 , array2, NUMBER:20)
+PRINT(g);
+PRINT(c);
+PRINT(array2);
+
+
+MAKE booloflife = SENTENCE(WORD:"Never stop believing" , WORD: " " , WORD: "TO U!!")
+PRINT(booloflife)
+
+PRINT(j2)
 END_PROGRAMM
 
 //just an addition
