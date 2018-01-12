@@ -33,7 +33,7 @@
 
 
 #define ITEM geter
-#define SETITEM seter
+#define SETITEM ;seter
 
 #define SUM add
 #define DIFFERENCE sub
@@ -580,7 +580,7 @@ public:
     SentenceObject(Myvector vec){
 
         setId();
-        setList(vec.vec);
+        setList((vec.vec));
     }
 
     
@@ -719,35 +719,47 @@ Objects   geter(T a, T1 b) {
 }
 
 
-Objects   seter(int  a, Objects b, Objects c) {
+void  seter(int  a, Objects &b, Objects c) {
     Objects obj;
     ArrayObject* array = static_cast<ArrayObject*>(&b);
     for(int i=0;i<array->GetValue().size();i++){
         if(i==a-1){
-            if(c.getId() == "number"){
-                
-                if(array->GetValue()[i].getId() == "number"){
-                    NumberObject* num = static_cast<NumberObject*>(&c);
-                    NumberObject* tochange = static_cast<NumberObject*>(&array->GetValue()[i]);
-                    tochange->setValue(num->GetValue());
-                    //cout<<array->GetValue()[i]<<endl;
-                    return *tochange;
-                }else if(array->GetValue()[i].getId() == "word"){
-                    
-                    vector<Objects> vec = array->GetValue();
+
+            vector<Objects> vec = array->GetValue();
                     Objects::CopyObject(&vec[i] , c);
                     array->setValue(vec);
-                    return array->GetValue()[i];
-                }
-            }
         
         }
-    }
-    return obj;
-    
+    }    
 }
 
 
+void  seter(vector<int>  a, Objects &b, Objects c) {
+    Objects obj;
+    ArrayObject* array = static_cast<ArrayObject*>(&b);
+    int firstIndex = a[0] - 1;
+    int secondIndex = a[1] -1;
+    Objects vecBig = array->GetValue()[firstIndex];
+
+    if(vecBig.getId() == "array"){
+            ArrayObject* arraySecond = static_cast<ArrayObject*>(&vecBig);
+
+    for(int i=0;i<array->GetValue().size();i++){
+        if(i==a[1]-1){
+
+                    vector<Objects> vec = arraySecond->GetValue();
+                    Objects::CopyObject(&vec[secondIndex] , c);
+                    arraySecond->setValue(vec);
+                    vector<Objects> anothervec = array->GetValue();
+                    Objects::CopyObject(&anothervec[firstIndex] , *arraySecond);
+                    array->setValue(anothervec);
+        
+            }
+        }  
+    }else{
+        cout << "Not an array!" << endl;
+    }
+}
 
 
 

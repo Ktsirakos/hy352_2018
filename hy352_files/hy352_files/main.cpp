@@ -43,20 +43,20 @@ MAKE array2 = ARRAY {
 
 MAKE j= ITEM (7, array2)
 PRINT(j);
-cout<<"thanos"<<endl;
+PRINT(array2)
 
+;cout<<"thanos"<<endl;
 
-MAKE g= SETITEM (3, array2, NUMBER:1)
-MAKE c= SETITEM (4 , array2, NUMBER:20)
-PRINT(g);
-PRINT(c);
+SETITEM ({4 , 1} , array2 , NUMBER:150)
 PRINT(array2);
+
+
+
 
 
 MAKE booloflife = SENTENCE(WORD:"Never stop believing" , WORD: " " , WORD: "TO U!!")
 PRINT(booloflife)
 
-PRINT(j2)
 END_PROGRAMM
 
 //just an addition
