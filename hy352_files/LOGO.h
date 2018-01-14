@@ -4,7 +4,8 @@
 #include <string>
 #include <sstream>
 
-#define START_PROGRAMM using namespace std; int main (){ \
+#define START_PROGRAMM using namespace std; int main (){  __count.push_back(0);\
+                                                        __iter.push_back(false); \
                                                         void nothing(); \
                                                         vector<Objects> dummy
 #define END_PROGRAMM ;return 0; }
@@ -17,19 +18,22 @@
 
 #define BOOLEAN *(new BooleanObject()) =false? false 
 #define LIST    (*(new ListObject())) 
-#define ARRAY  (*(new ArrayObject())).vec  = 
+#define ARRAY  (*(new ArrayObject())).vec  =
+
 #define TRUE true 
 #define FALSE false
 
+#define SENTENCE (*(new SentenceObject())) = func
 
-#define IF ;if(
+
+#define IF ;enter_if(); if(
 #define AND and_comparer
 #define OR or_comparer
 #define NOT not_comparer
 #define ELSE ;}else{
 #define ELIF ;}else if(
-#define DO ){
-#define END ;}
+#define DO ){ increase();
+#define END ;}__count.pop_back();__iter.pop_back();
 
 
 
@@ -43,18 +47,44 @@
 #define MODULO mod
 #define MINUS mini
 
-
-
-#define REPEAT ;for(int i =0  ; i<
+#define REPEAT ; enter_iter();for(int i =0  ; i<
 #define WHILE i;){} while(
 #define TIMES ;i++
+#define FOREACH ;enter_iter();for(Objects& items :
+#define SHOW(x) PRINT(items)
+#define ELEM items
+#define REPCOUNT __count[__count.size()-1]
 
 
-#define SENTENCE (*(new SentenceObject())) = func
-
+#define TO void
+#define WITH (
+#define FSTART ){
+#define FEND }
 
 
 using namespace std;
+
+
+vector<int>__count;
+vector<bool>__iter;
+
+void enter_if(){
+    __count.push_back(REPCOUNT);
+    __iter.push_back(false);
+    
+}
+
+void enter_iter(){
+    __count.push_back(0);
+    __iter.push_back(true);
+}
+
+void increase(){
+    if(__iter[__iter.size()-1]){
+        REPCOUNT++;
+    }
+    
+}
 
 
 class Objects {
@@ -102,6 +132,20 @@ protected:
     }
 
 public:
+    
+        
+        vector<Objects>::iterator begin(){
+            return list.begin();
+        }
+        vector<Objects>::iterator end(){
+            return list.end();
+        }
+        vector<Objects>::const_iterator begin() const {
+            return list.begin();
+        }
+        vector<Objects>::const_iterator end() const {
+            return list.end();
+        }
 
        void setId(string Id){
            id = Id;
@@ -136,6 +180,7 @@ public:
         Objects(){};
         
 };
+//Objects::VectorValues items;
 
 
 
@@ -232,6 +277,8 @@ public:
 
 class ArrayObject : public Objects {
 public:
+    
+    
 
     vector<Objects> vec;
 
@@ -249,6 +296,7 @@ public:
 
     ArrayObject(){ setId(); }
 };
+
 
 
 
@@ -381,37 +429,55 @@ bool operator!= (Objects object ,  WordObject x){
     return false;
 }
 
-
-
-NumberObject operator+ (NumberObject object , NumberObject x){
-    
-    NumberObject x3=*(new NumberObject(object.GetValue()+x.GetValue()) );
-    return x3;
-    
-}
-
-
-NumberObject operator+ (Objects object , NumberObject x){
+NumberObject operator+ (Objects object , Objects x){
     
     NumberObject* number = static_cast<NumberObject*>(&object);
-    NumberObject x3=*(new NumberObject(number->GetValue()+x.GetValue()) );
+    NumberObject* number1 = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(number->GetValue()+number1->GetValue()) );
     return x3;
     
 }
 
 
-NumberObject operator+ (NumberObject object , Objects x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&x);
-    NumberObject x3=*(new NumberObject(object.GetValue()+number->GetValue()) );
-    return x3;
-    
-}
 
+//NumberObject operator+ (NumberObject object , NumberObject x){
+//
+//    NumberObject x3=*(new NumberObject(object.GetValue()+x.GetValue()) );
+//    return x3;
+//
+//}
+//
+//
+//NumberObject operator+ (Objects object , NumberObject x){
+//
+//    NumberObject* number = static_cast<NumberObject*>(&object);
+//    NumberObject x3=*(new NumberObject(number->GetValue()+x.GetValue()) );
+//    return x3;
+//
+//}
+//
+//
+//NumberObject operator+ (NumberObject object , Objects x){
+//
+//    NumberObject* number = static_cast<NumberObject*>(&x);
+//    NumberObject x3=*(new NumberObject(object.GetValue()+number->GetValue()) );
+//    return x3;
+//
+//}
+//
 
 NumberObject operator- (NumberObject object , NumberObject x){
     
     NumberObject x3=*(new NumberObject(object.GetValue()-x.GetValue()) );
+    return x3;
+    
+}
+
+NumberObject operator- (Objects object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject* number1 = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(number->GetValue()-number1->GetValue()) );
     return x3;
     
 }
@@ -459,6 +525,15 @@ NumberObject operator* (NumberObject object , Objects x){
     
 }
 
+NumberObject operator* (Objects object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject* number1 = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(number->GetValue()*number1->GetValue()) );
+    return x3;
+    
+}
+
 NumberObject operator/ (NumberObject object , NumberObject x){
     
     NumberObject x3=*(new NumberObject(object.GetValue()/x.GetValue()) );
@@ -471,6 +546,15 @@ NumberObject operator/ (Objects object , NumberObject x){
     
     NumberObject* number = static_cast<NumberObject*>(&object);
     NumberObject x3=*(new NumberObject(number->GetValue()/x.GetValue()) );
+    return x3;
+    
+}
+
+NumberObject operator/ (Objects object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject* number1 = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(number->GetValue()/number1->GetValue()) );
     return x3;
     
 }
@@ -494,6 +578,15 @@ NumberObject operator% (NumberObject object , NumberObject x){
 
 }
 
+
+NumberObject operator% (Objects object , Objects x){
+    
+    NumberObject* number = static_cast<NumberObject*>(&object);
+    NumberObject* number1 = static_cast<NumberObject*>(&x);
+    NumberObject x3=*(new NumberObject(number->GetValue()/number1->GetValue()) );
+    return x3;
+    
+}
 
 NumberObject operator% (Objects object , NumberObject x){
 
@@ -602,6 +695,8 @@ vector<Objects>  operator,(Objects a , Objects b){
    myvec.push_back(b);
    return myvec;
 }
+
+
 
 Myvector myvec;
 
@@ -803,14 +898,33 @@ T add(T first, Args... args) {
 }
 
 
+vector<Objects>subvec;
 template<typename T>
-T sub(T v) {
-    return v;
+Objects sub(T v) {
+    NumberObject u,c,k;
+    for(int i=0;i<subvec.size();i++){
+        if(i==0){
+//            c = subvec[i];
+//            k = subvec[++i];
+            u=subvec[i]-subvec[++i];
+        }else{
+            
+            
+            u=u-subvec[i];
+        }
+        
+    }
+    
+    u=u-v;
+    
+    return u;
+    
 }
 
 template<typename T, typename... Args>
-T sub(T first, Args... args) {
-    return first - sub(args...);
+Objects sub(T first, Args... args) {
+    subvec.push_back(first);
+    return  sub(args...);
 }
 
 
@@ -825,24 +939,61 @@ T mul(T first, Args... args) {
 }
 
 
+vector<Objects>divvec;
 template<typename T>
-T divi(T v) {
-    return v;
+Objects divi(T v) {
+    NumberObject u,c,k;
+    for(int i=0;i<divvec.size();i++){
+        if(i==0){
+//            c = divvec[i];
+//            k = divvec[++i];
+            u=divvec[i]/divvec[++i];
+        }else{
+        
+        
+        u=u/divvec[i];
+        }
+        
+    }
+    
+    u=u/v;
+    
+    return u;
+    
 }
 
 template<typename T, typename... Args>
-T divi(T first, Args... args) {
-    return first / divi(args...);
+Objects divi(T first, Args... args) {
+    divvec.push_back(first);
+    return  divi(args...);
 }
 
+vector<Objects>modvec;
 template<typename T>
-T mod(T v) {
-    return v;
+Objects mod(T v) {
+    NumberObject u,c,k;
+    for(int i=0;i<modvec.size();i++){
+        if(i==0){
+//            c= modvec[i];
+//            k= modvec[++i];
+            u=modvec[i]%modvec[++i];
+        }else{
+            
+            
+            u=u%modvec[i];
+        }
+        
+    }
+    
+    u=u%v;
+    
+    return u;
 }
 
 template<typename T, typename... Args>
-T mod(T first, Args... args) {
-    return first % mod(args...);
+Objects mod(T first, Args... args) {
+    modvec.push_back(first);
+    return  mod(args...);
 }
 
 
