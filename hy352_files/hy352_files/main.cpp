@@ -12,10 +12,28 @@
 #include "../LOGO.h"
 
 
-TO max WITH int x , int y FSTART
-PRINT("max");
-FEND
+// TO max WITH int x , int y FSTART
+// PRINT("max");
+// FEND
+// START_PROGRAMM
+
+//     MAKE integer =  NUMBER:20
+//     MAKE x =  NUMBER:10
+//     MAKE y =  NUMBER:30
+//     MAKE word = WORD: "Hello i am here!"
+//     MAKE boolean = BOOLEAN: TRUE;
+
+//     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
+//     MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
+//     cout << integer <<  endl;
+//     cout << word << endl;
+//     cout << boolean << endl;
+//     cout << list << endl;
+//     cout << array << endl; 
+
+
 START_PROGRAMM
+
 
     MAKE integer =  NUMBER:20
     MAKE x =  NUMBER:10
@@ -30,9 +48,6 @@ START_PROGRAMM
     cout << boolean << endl;
     cout << list << endl;
     cout << array << endl; 
-
-
-START_PROGRAMM
 
 IF OR(x==(NUMBER:10),integer==(NUMBER:30) ,boolean == (BOOLEAN: FALSE)) DO
 PRINT(x)
@@ -86,7 +101,7 @@ PRINT(list1)
 
 MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27] ,  NUMBER:30]
 PRINT(list2)
-max(1,2);
+//max(1,2);
 
 
 MAKE array2 = ARRAY { 
