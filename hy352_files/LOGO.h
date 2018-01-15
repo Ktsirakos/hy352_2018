@@ -7,12 +7,13 @@
 #define START_PROGRAMM using namespace std; int main (){  __count.push_back(0);\
                                                         __iter.push_back(false); \
                                                         void nothing(); \
-                                                        vector<Objects> dummy
+                                                        vector<Objects> dummy; \
+
 #define END_PROGRAMM ;return 0; }
 
 #define WORD   *(new WordObject()) = false? "u should'n see this message" 
 #define MAKE ;Objects 
-#define PRINT(x) ;cout << x << endl
+#define PRINT(x) ;cout << x << endl;
 
 #define NUMBER *(new NumberObject()) = 0?  -10000
 
@@ -51,7 +52,7 @@
 #define WHILE i;){} while(
 #define TIMES ;i++
 #define FOREACH ;enter_iter();for(Objects& ___items :
-#define SHOW cout << (false?Objects()
+#define SHOW    Show() = false?Objects()
 #define ELEM ___items)
 #define REPCOUNT __count[__count.size()-1]
 
@@ -67,15 +68,15 @@
 
 
 
-#define FORWARD Forward()=
-#define BACK Back()=
-#define RIGHT Right()=
-#define LEFT Left()=
-#define CIRCLE Circle()=
-#define SETPENSIZE PenSize()=
-#define PENDOWN PenDown()
-#define PENUP PenUp()
-#define CENTER Center()
+#define FORWARD Forward2()=
+#define BACK Back2()=
+#define RIGHT Right2()=
+#define LEFT Left2()=
+#define CIRCLE Circle2()=
+#define SETPENSIZE PenSize2()=
+#define PENDOWN PenDown2()
+#define PENUP PenUp2()
+#define CENTER Center2()
 
 
 
@@ -198,6 +199,8 @@ public:
         
 };
 
+
+
 class NumberObject : public Objects {
 public:
     void setId(){
@@ -318,88 +321,88 @@ public:
 };
 
 
-class Forward : public Objects {
+class Forward2{
 public:
-    Forward(int x){
+    Forward2(int x){
         //turtle_mv_forward(x)
         cout << "Forward step" << x << endl;
     }
     
-    Forward(NumberObject x){
+    Forward2(NumberObject x){
         //turtle_mv_forward(x)
         //PRINT(x);
     }
     
-    Forward(){}
+    Forward2(){}
 };
 
 
-class Back : public Objects {
+class Back2{
 public:
-    Back(int x){
+    Back2(int x){
         //turtle_mv_backward(x)
         cout << "Back step" << x << endl;
     }
     
-    Back(Objects x){
+    Back2(Objects x){
         //turtle_mv_backward(x)
         //PRINT(x);
     }
     
-    Back(){}
+    Back2(){}
 };
 
 
-class Right : public Objects {
+class Right2{
 public:
-    Right(int x){
+    Right2(int x){
         //turtle_mv_backward(x)
         cout << "Right step" << x << endl;
     }
     
-    Right(Objects x){
+    Right2(Objects x){
         //turtle_mv_backward(x)
         //PRINT(x);
     }
     
-    Right(){}
+    Right2(){}
 };
 
-class Left : public Objects {
+class Left2 {
 public:
-    Left(int x){
+    Left2(int x){
         //turtle_mv_backward(x)
         cout << "Left step" << x << endl;
     }
     
-    Left(Objects x){
+    Left2(Objects x){
         //turtle_mv_backward(x)
         //PRINT(x);
     }
     
-    Left(){}
+    Left2(){}
 };
 
-class Center : public Objects {
+class Center2{
 public:
     
-    Center(){}
+    Center2(){}
 };
 
 
-class Circle : public Objects {
+class Circle2{
 public:
-    Circle(int x){
+    Circle2(int x){
         //turtle_mv_backward(x)
         cout << "Circle step" << x << endl;
     }
     
-    Circle(Objects x){
+    Circle2(Objects x){
         //turtle_mv_backward(x)
         //PRINT(x);
     }
     
-    Circle(){}
+    Circle2(){}
 };
 
 class PenSize : public Objects {
@@ -932,6 +935,28 @@ ostream& operator<< (ostream& output , Objects object){
     return output;
 }
 
+
+
+class Show {
+    public:
+    Objects _x;
+    Show(){
+
+    }
+
+
+    Show(Objects x){
+        _x = x;
+        cout << x << endl;
+
+    }
+};
+
+
+ostream& operator<< (ostream& output , Show x){
+            output << x._x << endl;
+            return output;
+}
 
 void nothing(){
     //den kanw tipota
