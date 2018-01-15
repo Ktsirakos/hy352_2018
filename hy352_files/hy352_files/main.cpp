@@ -41,6 +41,7 @@ START_PROGRAMM
     MAKE x =  NUMBER:10
     MAKE y =  NUMBER:30
     MAKE word = WORD: "Hello i am here!"
+    MAKE word1 = WORD: "Hello i am here here here!"
     MAKE boolean = BOOLEAN: TRUE;
 
     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
@@ -65,8 +66,8 @@ PRINT("mphka sthn end");
 END
 
 ASSIGN x=SUM(x,x,NUMBER:40,x,NUMBER:40,NUMBER:40);
-PRINT("===========")
-PRINT(x)
+PRINT("===========");
+SHOW:word1)
 PRINT("===========")
 
 

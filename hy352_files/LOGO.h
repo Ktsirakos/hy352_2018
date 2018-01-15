@@ -6,9 +6,7 @@
 
 #define START_PROGRAMM using namespace std; int main (){  __count.push_back(0);\
                                                         __iter.push_back(false); \
-                                                        void nothing(); \
-                                                        vector<Objects> dummy; \
-
+                                          
 #define END_PROGRAMM ;return 0; }
 
 #define WORD   *(new WordObject()) = false? "u should'n see this message" 
