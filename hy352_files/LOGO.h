@@ -45,20 +45,38 @@
 #define QUOTIENT divi
 #define MODULO mod
 #define MINUS mini
+#define ASSIGN
 
 #define REPEAT ; enter_iter();for(int i =0  ; i<
 #define WHILE i;){} while(
 #define TIMES ;i++
-#define FOREACH ;enter_iter();for(Objects& items :
-#define SHOW(x) PRINT(items)
-#define ELEM items
+#define FOREACH ;enter_iter();for(Objects& ___items :
+#define SHOW cout << (false?Objects()
+#define ELEM ___items)
 #define REPCOUNT __count[__count.size()-1]
 
 
 #define TO void
-#define WITH (
+#define WITH (ListObject
 #define FSTART ){
 #define FEND }
+#define CALL 
+#define ARG(x) args.GetValue()[x-1]
+#define RETURN return;
+
+
+
+
+#define FORWARD Forward()=
+#define BACK Back()=
+#define RIGHT Right()=
+#define LEFT Left()=
+#define CIRCLE Circle()=
+#define SETPENSIZE PenSize()=
+#define PENDOWN PenDown()
+#define PENUP PenUp()
+#define CENTER Center()
+
 
 
 using namespace std;
@@ -179,13 +197,6 @@ public:
         Objects(){};
         
 };
-//Objects::VectorValues items;
-
-
-
-
-
-
 
 class NumberObject : public Objects {
 public:
@@ -201,6 +212,16 @@ public:
         setNumber(x);
     }
 
+    void operator=(Objects x){
+        if(x.getId()=="number"){
+            //PRINT("mphka");
+            NumberObject* number = static_cast<NumberObject*>(&x);
+            //PRINT(number->GetValue());
+            NumberObject toreturn;
+            this->setValue(number->GetValue());
+        }
+
+    }
     NumberObject(double _x){ setNumber(_x); setId(); };
     NumberObject(){  
         setId(); 
@@ -297,136 +318,259 @@ public:
 };
 
 
+class Forward : public Objects {
+public:
+    Forward(int x){
+        //turtle_mv_forward(x)
+        cout << "Forward step" << x << endl;
+    }
+    
+    Forward(NumberObject x){
+        //turtle_mv_forward(x)
+        //PRINT(x);
+    }
+    
+    Forward(){}
+};
 
 
+class Back : public Objects {
+public:
+    Back(int x){
+        //turtle_mv_backward(x)
+        cout << "Back step" << x << endl;
+    }
+    
+    Back(Objects x){
+        //turtle_mv_backward(x)
+        //PRINT(x);
+    }
+    
+    Back(){}
+};
 
-bool operator== (Objects object ,  NumberObject x){
-    if(object.getId() == "number"){
+
+class Right : public Objects {
+public:
+    Right(int x){
+        //turtle_mv_backward(x)
+        cout << "Right step" << x << endl;
+    }
+    
+    Right(Objects x){
+        //turtle_mv_backward(x)
+        //PRINT(x);
+    }
+    
+    Right(){}
+};
+
+class Left : public Objects {
+public:
+    Left(int x){
+        //turtle_mv_backward(x)
+        cout << "Left step" << x << endl;
+    }
+    
+    Left(Objects x){
+        //turtle_mv_backward(x)
+        //PRINT(x);
+    }
+    
+    Left(){}
+};
+
+class Center : public Objects {
+public:
+    
+    Center(){}
+};
+
+
+class Circle : public Objects {
+public:
+    Circle(int x){
+        //turtle_mv_backward(x)
+        cout << "Circle step" << x << endl;
+    }
+    
+    Circle(Objects x){
+        //turtle_mv_backward(x)
+        //PRINT(x);
+    }
+    
+    Circle(){}
+};
+
+class PenSize : public Objects {
+public:
+    PenSize(int x){
+        //turtle_mv_backward(x)
+        cout << "PenSize is" << x << endl;
+    }
+ 
+    
+    PenSize(Objects x){
+        //turtle_mv_backward(x)
+        //PRINT(x);
+    }
+    
+    PenSize(){}
+};
+
+class PenDown : public Objects {
+public:
+    PenDown(){}
+};
+
+class PenUp : public Objects {
+public:
+    PenUp(){}
+};
+
+
+bool operator== (Objects object ,  Objects x){
+    if(object.getId() == "word" && x.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        WordObject* word1 = static_cast<WordObject*>(&x);
+        
+        return word->GetValue() == word1->GetValue();
+    }else if(object.getId() == "number"&&x.getId() == "number"){
         NumberObject* number = static_cast<NumberObject*>(&object);
-        return number->GetValue() == x.GetValue();
+        NumberObject* number1 = static_cast<NumberObject*>(&x);
+        
+        return number->GetValue() == number1->GetValue();
+    }else if(object.getId() == "boolean"&&x.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        BooleanObject* boolean1 = static_cast<BooleanObject*>(&x);
+        
+        return boolean->GetValue() == boolean1->GetValue();
     }
     
+    PRINT("den ekanes kalh sugrish");
+    exit(3);
     return false;
 }
 
-
-bool operator== (Objects object ,  BooleanObject x){
-    if(object.getId() == "boolean"){
-        BooleanObject* number = static_cast<BooleanObject*>(&object);
-        return number->GetValue() == x.GetValue();
-    }
-    
-    return false;
-}
-
-bool operator== (Objects object ,  WordObject x){
-    if(object.getId() == "word"){
-        WordObject* number = static_cast<WordObject*>(&object);
-        return number->GetValue() == x.GetValue();
-    }
-    
-    return false;
-}
-
-bool operator> (Objects object ,  NumberObject x){
-    if(object.getId() == "number"){
+bool operator>= (Objects object ,  Objects x){
+    if(object.getId() == "word" && x.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        WordObject* word1 = static_cast<WordObject*>(&x);
+        
+        return word->GetValue() >= word1->GetValue();
+    }else if(object.getId() == "number"&&x.getId() == "number"){
         NumberObject* number = static_cast<NumberObject*>(&object);
-        return number->GetValue() > x.GetValue();
+        NumberObject* number1 = static_cast<NumberObject*>(&x);
+        
+        return number->GetValue() >= number1->GetValue();
+    }else if(object.getId() == "boolean"&&x.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        BooleanObject* boolean1 = static_cast<BooleanObject*>(&x);
+        
+        return boolean->GetValue() >= boolean1->GetValue();
     }
     
+    PRINT("den ekanes kalh sugrish");
+    exit(3);
     return false;
 }
 
-bool operator> (Objects object ,  WordObject x){
-    if(object.getId() == "word"){
-        WordObject* number = static_cast<WordObject*>(&object);
-        return number->GetValue() > x.GetValue();
-    }
-    
-    return false;
-}
-
-
-bool operator>= (Objects object ,  NumberObject x){
-    if(object.getId() == "number"){
+bool operator<= (Objects object ,  Objects x){
+    if(object.getId() == "word" && x.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        WordObject* word1 = static_cast<WordObject*>(&x);
+        
+        return word->GetValue() <= word1->GetValue();
+    }else if(object.getId() == "number"&&x.getId() == "number"){
         NumberObject* number = static_cast<NumberObject*>(&object);
-        return number->GetValue() >= x.GetValue();
+        NumberObject* number1 = static_cast<NumberObject*>(&x);
+        
+        return number->GetValue() <= number1->GetValue();
+    }else if(object.getId() == "boolean"&&x.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        BooleanObject* boolean1 = static_cast<BooleanObject*>(&x);
+        
+        return boolean->GetValue() <= boolean1->GetValue();
     }
     
+    PRINT("den ekanes kalh sugrish");
+    exit(3);
     return false;
 }
 
-bool operator>= (Objects object ,  WordObject x){
-    if(object.getId() == "word"){
-        WordObject* number = static_cast<WordObject*>(&object);
-        return number->GetValue() >= x.GetValue();
-    }
-    
-    return false;
-}
-
-bool operator<= (Objects object ,  NumberObject x){
-    if(object.getId() == "number"){
+bool operator!= (Objects object ,  Objects x){
+    if(object.getId() == "word" && x.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        WordObject* word1 = static_cast<WordObject*>(&x);
+        
+        return word->GetValue() != word1->GetValue();
+    }else if(object.getId() == "number"&&x.getId() == "number"){
         NumberObject* number = static_cast<NumberObject*>(&object);
-        return number->GetValue() <= x.GetValue();
+        NumberObject* number1 = static_cast<NumberObject*>(&x);
+        
+        return number->GetValue() != number1->GetValue();
+    }else if(object.getId() == "boolean"&&x.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        BooleanObject* boolean1 = static_cast<BooleanObject*>(&x);
+        
+        return boolean->GetValue() != boolean1->GetValue();
     }
     
+    PRINT("den ekanes kalh sugrish");
+    exit(3);
     return false;
 }
 
-bool operator<= (Objects object ,  WordObject x){
-    if(object.getId() == "word"){
-        WordObject* number = static_cast<WordObject*>(&object);
-        return number->GetValue() <= x.GetValue();
-    }
-    
-    return false;
-}
 
-bool operator< (Objects object ,  NumberObject x){
-    if(object.getId() == "number"){
+bool operator> (Objects object ,  Objects x){
+    if(object.getId() == "word" && x.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        WordObject* word1 = static_cast<WordObject*>(&x);
+        
+        return word->GetValue() > word1->GetValue();
+    }else if(object.getId() == "number"&&x.getId() == "number"){
         NumberObject* number = static_cast<NumberObject*>(&object);
-        return number->GetValue() < x.GetValue();
+        NumberObject* number1 = static_cast<NumberObject*>(&x);
+        
+        return number->GetValue() > number1->GetValue();
+    }else if(object.getId() == "boolean"&&x.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        BooleanObject* boolean1 = static_cast<BooleanObject*>(&x);
+        
+        return boolean->GetValue() > boolean1->GetValue();
     }
     
+    PRINT("den ekanes kalh sugrish");
+    exit(3);
     return false;
 }
 
-bool operator< (Objects object ,  WordObject x){
-    if(object.getId() == "word"){
-        WordObject* number = static_cast<WordObject*>(&object);
-        return number->GetValue() < x.GetValue();
-    }
-    
-    return false;
-}
 
-bool operator!= (Objects object ,  NumberObject x){
-    if(object.getId() == "number"){
+bool operator< (Objects object ,  Objects x){
+    if(object.getId() == "word" && x.getId() == "word"){
+        WordObject* word = static_cast<WordObject*>(&object);
+        WordObject* word1 = static_cast<WordObject*>(&x);
+        
+        return word->GetValue() < word1->GetValue();
+    }else if(object.getId() == "number"&&x.getId() == "number"){
         NumberObject* number = static_cast<NumberObject*>(&object);
-        return number->GetValue() != x.GetValue();
+        NumberObject* number1 = static_cast<NumberObject*>(&x);
+        
+        return number->GetValue() < number1->GetValue();
+    }else if(object.getId() == "boolean"&&x.getId() == "boolean"){
+        BooleanObject* boolean = static_cast<BooleanObject*>(&object);
+        BooleanObject* boolean1 = static_cast<BooleanObject*>(&x);
+        
+        return boolean->GetValue() < boolean1->GetValue();
     }
     
+    PRINT("den ekanes kalh sugrish");
+    exit(3);
     return false;
 }
 
-bool operator!= (Objects object ,  BooleanObject x){
-    if(object.getId() == "boolean"){
-        BooleanObject* number = static_cast<BooleanObject*>(&object);
-        return number->GetValue() != x.GetValue();
-    }
-    
-    return false;
-}
 
-bool operator!= (Objects object ,  WordObject x){
-    if(object.getId() == "word"){
-        WordObject* number = static_cast<WordObject*>(&object);
-        return number->GetValue() != x.GetValue();
-    }
-    
-    return false;
-}
+
 
 NumberObject operator+ (Objects object , Objects x){
     
@@ -439,90 +583,23 @@ NumberObject operator+ (Objects object , Objects x){
 
 
 
-//NumberObject operator+ (NumberObject object , NumberObject x){
-//
-//    NumberObject x3=*(new NumberObject(object.GetValue()+x.GetValue()) );
-//    return x3;
-//
-//}
-//
-//
-//NumberObject operator+ (Objects object , NumberObject x){
-//
-//    NumberObject* number = static_cast<NumberObject*>(&object);
-//    NumberObject x3=*(new NumberObject(number->GetValue()+x.GetValue()) );
-//    return x3;
-//
-//}
-//
-//
-//NumberObject operator+ (NumberObject object , Objects x){
-//
-//    NumberObject* number = static_cast<NumberObject*>(&x);
-//    NumberObject x3=*(new NumberObject(object.GetValue()+number->GetValue()) );
-//    return x3;
-//
-//}
-//
 
-NumberObject operator- (NumberObject object , NumberObject x){
-    
-    NumberObject x3=*(new NumberObject(object.GetValue()-x.GetValue()) );
-    return x3;
-    
-}
+
 
 NumberObject operator- (Objects object , Objects x){
-    
+
     NumberObject* number = static_cast<NumberObject*>(&object);
     NumberObject* number1 = static_cast<NumberObject*>(&x);
     NumberObject x3=*(new NumberObject(number->GetValue()-number1->GetValue()) );
     return x3;
-    
+
 }
 
 
-NumberObject operator- (Objects object , NumberObject x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&object);
-    NumberObject x3=*(new NumberObject(number->GetValue()-x.GetValue()) );
-    return x3;
-    
-}
 
 
-NumberObject operator- (NumberObject object , Objects x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&x);
-    NumberObject x3=*(new NumberObject(object.GetValue()-number->GetValue()) );
-    return x3;
-    
-}
-
-NumberObject operator* (NumberObject object , NumberObject x){
-    
-    NumberObject x3=*(new NumberObject(object.GetValue()*x.GetValue()) );
-    return x3;
-    
-}
 
 
-NumberObject operator* (Objects object , NumberObject x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&object);
-    NumberObject x3=*(new NumberObject(number->GetValue()*x.GetValue()) );
-    return x3;
-    
-}
-
-
-NumberObject operator* (NumberObject object , Objects x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&x);
-    NumberObject x3=*(new NumberObject(object.GetValue()*number->GetValue()) );
-    return x3;
-    
-}
 
 NumberObject operator* (Objects object , Objects x){
     
@@ -533,21 +610,7 @@ NumberObject operator* (Objects object , Objects x){
     
 }
 
-NumberObject operator/ (NumberObject object , NumberObject x){
-    
-    NumberObject x3=*(new NumberObject(object.GetValue()/x.GetValue()) );
-    return x3;
-    
-}
 
-
-NumberObject operator/ (Objects object , NumberObject x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&object);
-    NumberObject x3=*(new NumberObject(number->GetValue()/x.GetValue()) );
-    return x3;
-    
-}
 
 NumberObject operator/ (Objects object , Objects x){
     
@@ -559,67 +622,21 @@ NumberObject operator/ (Objects object , Objects x){
 }
 
 
-NumberObject operator/ (NumberObject object , Objects x){
-    
-    NumberObject* number = static_cast<NumberObject*>(&x);
-    NumberObject x3=*(new NumberObject(object.GetValue()/number->GetValue()) );
-    return x3;
-    
-}
 
-NumberObject operator% (NumberObject object , NumberObject x){
-    
-    int tmp =object.GetValue();
-    int tmp1 =x.GetValue();
-    
-    NumberObject x3=*(new NumberObject(tmp%tmp1) );
-    return x3;
-
-}
 
 
 NumberObject operator% (Objects object , Objects x){
     
-    NumberObject* number = static_cast<NumberObject*>(&object);
-    NumberObject* number1 = static_cast<NumberObject*>(&x);
-    NumberObject x3=*(new NumberObject(number->GetValue()/number1->GetValue()) );
-    return x3;
     
-}
-
-NumberObject operator% (Objects object , NumberObject x){
-
     NumberObject* number = static_cast<NumberObject*>(&object);
-
     int tmp =number->GetValue();
-    int tmp1 =x.GetValue();
-    NumberObject x3=*(new NumberObject(tmp % tmp1) );
-    return x3;
-
-}
-
-
-NumberObject operator% (NumberObject object , Objects x){
-    
-    
-
-    int tmp =object.GetValue();
-    NumberObject* number = static_cast<NumberObject*>(&x);
-    int tmp1 =number->GetValue();
-    //NumberObject* number = static_cast<NumberObject*>(&x);
+    NumberObject* number1 = static_cast<NumberObject*>(&x);
+    int tmp1 =number1->GetValue();
     NumberObject x3=*(new NumberObject(tmp%tmp1) );
     return x3;
-
+    
 }
 
-
-//NumberObject operator= (NumberObject object , NumberObject x){
-//
-//    //NumberObject* number = static_cast<NumberObject*>(&x);
-//    NumberObject x3=*(new NumberObject(object.GetValue()=x.GetValue()) );
-//    return x3;
-//
-//}
 
 
 NumberObject mini (NumberObject object ){
@@ -637,9 +654,6 @@ NumberObject mini (Objects object ){
     return x3;
     
 }
-
-
-
 
 
 
@@ -680,8 +694,15 @@ public:
 };
 
 
+vector<Objects>  operator,(ListObject c , vector<Objects>  myvec){
+    myvec.push_back(c);
+    return myvec;
+}
 
-
+vector<Objects>  operator,(vector<Objects>  myvec , ListObject c){
+    myvec.push_back(c);
+    return myvec;
+}
 
 vector<Objects>  operator,(vector<Objects>  myvec , Objects c){
    myvec.push_back(c);
@@ -708,14 +729,6 @@ vector<Objects>  operator,(ListObject a , ListObject b){
 }
 
 
-//===========================================
-
-
-//void func(Myvector myvec){
-//    cout << "constructor" << endl;
-//
-//
-//}
 
 Myvector myvec;
 
@@ -767,6 +780,7 @@ ostream& PrintArray(ostream& output , ArrayObject* array){
                 PrintArray(output , arraynew);
             }
         }
+    return output;
 }
 
 
@@ -788,6 +802,7 @@ ostream& PrintLists(ostream& output , ListObject* list){
                 PrintLists(output , newlist);
             }
     }
+    return output;
 }
 
 
@@ -853,7 +868,6 @@ void  seter(vector<int>  a, Objects &b, Objects c) {
         cout << "Not an array!" << endl;
     }
 }
-
 
 
 ostream& operator<< (ostream& output , Objects object){
@@ -973,16 +987,19 @@ T add(T first, Args... args) {
 
 
 vector<Objects>subvec;
+
 template<typename T>
 Objects sub(T v) {
-    NumberObject u,c,k;
+    NumberObject u;
     for(int i=0;i<subvec.size();i++){
-        if(i==0){
-//            c = subvec[i];
-//            k = subvec[++i];
+        if(subvec.size()==1){
+            
+            u=subvec[i];
+            break;
+        }else if(i==0){
+
             u=subvec[i]-subvec[++i];
         }else{
-            
             
             u=u-subvec[i];
         }
@@ -1016,16 +1033,18 @@ T mul(T first, Args... args) {
 vector<Objects>divvec;
 template<typename T>
 Objects divi(T v) {
-    NumberObject u,c,k;
+    NumberObject u;
     for(int i=0;i<divvec.size();i++){
-        if(i==0){
-//            c = divvec[i];
-//            k = divvec[++i];
+        if(divvec.size()==1){
+            
+            u=divvec[i];
+            break;
+        }else if(i==0){
+            
             u=divvec[i]/divvec[++i];
         }else{
-        
-        
-        u=u/divvec[i];
+            
+            u=u/divvec[i];
         }
         
     }
@@ -1036,6 +1055,7 @@ Objects divi(T v) {
     
 }
 
+
 template<typename T, typename... Args>
 Objects divi(T first, Args... args) {
     divvec.push_back(first);
@@ -1045,14 +1065,16 @@ Objects divi(T first, Args... args) {
 vector<Objects>modvec;
 template<typename T>
 Objects mod(T v) {
-    NumberObject u,c,k;
+    NumberObject u;
     for(int i=0;i<modvec.size();i++){
-        if(i==0){
-//            c= modvec[i];
-//            k= modvec[++i];
+        if(modvec.size()==1){
+            
+            u=modvec[i];
+            break;
+        }else if(i==0){
+            
             u=modvec[i]%modvec[++i];
         }else{
-            
             
             u=u%modvec[i];
         }
@@ -1062,6 +1084,7 @@ Objects mod(T v) {
     u=u%v;
     
     return u;
+    
 }
 
 template<typename T, typename... Args>
