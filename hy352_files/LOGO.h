@@ -10,7 +10,7 @@
                                                     init_GUI();\
 
                                           
-#define END_PROGRAMM ;destroy_GUI();  return 0; }
+#define END_PROGRAMM ;destroy_GUI(); return 0; }
 
 #define WORD   *(new WordObject()) = false? "u should'n see this message" 
 #define MAKE ;Objects 
@@ -79,6 +79,9 @@
 #define PENUP PenUp2()
 #define CENTER Center2()
 #define PRINT Print2()=
+#define SETXY  SetXY2() = LIST 
+#define SETPENCOLOR  SetPenColor2() = LIST 
+#define SETSCREENCOLOR  SetScreenColor2() = LIST 
 
 
 
@@ -1040,6 +1043,112 @@ class Show {
     }
 };
 
+
+class SetXY2 {
+public:
+	SetXY2() {}
+
+	SetXY2(ListObject list) {
+
+		if (list.GetValue().size() != 2) {
+			cout << "Exactly 2 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" || list.GetValue()[1].getId() != "number") {
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+
+		turtle_go_to_position(number1->GetValue(), number2->GetValue());
+
+	}
+
+};
+
+
+
+class SetPenColor2 {
+public:
+	SetPenColor2() {}
+
+	SetPenColor2(ListObject list) {
+
+				if (list.GetValue().size() != 3) {
+			cout << "Exactly 3 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" ||
+			list.GetValue()[1].getId() != "number" ||
+			list.GetValue()[2].getId() != "number") {
+
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+		NumberObject* number3;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+		number2 = static_cast<NumberObject*>(&vec[2]);
+
+		set_pen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
+	}
+	
+};
+
+
+
+class SetScreenColor2 {
+public:
+	SetScreenColor2() {}
+
+	SetScreenColor2(ListObject list) {
+
+		if (list.GetValue().size() != 3) {
+			cout << "Exactly 3 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" ||
+			list.GetValue()[1].getId() != "number" ||
+			list.GetValue()[2].getId() != "number") {
+
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+		NumberObject* number3;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+		number3 = static_cast<NumberObject*>(&vec[2]);
+
+		set_screen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
+
+	}
+
+};
 
 ostream& operator<< (ostream& output , Show x){
             output << x._x << endl;
