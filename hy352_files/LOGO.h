@@ -4,14 +4,17 @@
 #include <string>
 #include <sstream>
 
-#define START_PROGRAMM using namespace std; int main (){  __count.push_back(0);\
-                                                        __iter.push_back(false); \
+
+#define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(0);\
+                                                        __iter.push_back(false);\
+                                                    init_GUI();\
+
                                           
-#define END_PROGRAMM ;return 0; }
+#define END_PROGRAMM ;destroy_GUI();  return 0; }
 
 #define WORD   *(new WordObject()) = false? "u should'n see this message" 
 #define MAKE ;Objects 
-#define PRINT(x) ;cout << x << endl;
+#define PRINT1(x) ;cout << x << endl;
 
 #define NUMBER *(new NumberObject()) = 0?  -10000
 
@@ -51,7 +54,7 @@
 #define TIMES ;i++
 #define FOREACH ;enter_iter();for(Objects& ___items :
 #define SHOW    Show() = false?Objects()
-#define ELEM ___items)
+#define ELEM ___items
 #define REPCOUNT __count[__count.size()-1]
 
 
@@ -75,6 +78,7 @@
 #define PENDOWN PenDown2()
 #define PENUP PenUp2()
 #define CENTER Center2()
+#define PRINT Print2()=
 
 
 
@@ -321,30 +325,41 @@ public:
 
 class Forward2{
 public:
-    Forward2(int x){
-        //turtle_mv_forward(x)
-        cout << "Forward step" << x << endl;
+    Forward2(float x){
+        turtle_mv_forward(x);
+        PRINT1("mphka sthn float forward");
     }
     
-    Forward2(NumberObject x){
-        //turtle_mv_forward(x)
+    Forward2(Objects x){
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        float tmp=number->GetValue();
+        turtle_mv_forward(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject forward");
     }
     
-    Forward2(){}
+    Forward2(){
+        
+        
+        
+    }
 };
 
 
 class Back2{
 public:
-    Back2(int x){
-        //turtle_mv_backward(x)
-        cout << "Back step" << x << endl;
+    Back2(float x){
+        turtle_mv_backward(x)
+        PRINT1("mphka sthn float back");
+        
     }
     
     Back2(Objects x){
-        //turtle_mv_backward(x)
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        float tmp=number->GetValue();
+        turtle_mv_backward(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject back");
     }
     
     Back2(){}
@@ -354,13 +369,16 @@ public:
 class Right2{
 public:
     Right2(int x){
-        //turtle_mv_backward(x)
-        cout << "Right step" << x << endl;
+        turtle_rotate(x)
+        PRINT1("mphka sthn int right")
     }
     
     Right2(Objects x){
-        //turtle_mv_backward(x)
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        int tmp=number->GetValue();
+        turtle_rotate(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject riht");
     }
     
     Right2(){}
@@ -369,13 +387,16 @@ public:
 class Left2 {
 public:
     Left2(int x){
-        //turtle_mv_backward(x)
-        cout << "Left step" << x << endl;
+        turtle_rotate(-x)
+        PRINT1("mphka sthn int left")
     }
     
     Left2(Objects x){
-        //turtle_mv_backward(x)
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        int tmp=number->GetValue();
+        turtle_rotate(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject left");
     }
     
     Left2(){}
@@ -384,49 +405,91 @@ public:
 class Center2{
 public:
     
-    Center2(){}
+    Center2(){
+        PRINT1("mphka sthn center");
+        turtle_go_to_center();
+        
+    }
 };
 
 
 class Circle2{
 public:
-    Circle2(int x){
-        //turtle_mv_backward(x)
-        cout << "Circle step" << x << endl;
+    Circle2(unsigned x){
+        turtle_draw_circle(x)
+        PRINT1("mphka sthn unsigned circle");
     }
     
     Circle2(Objects x){
-        //turtle_mv_backward(x)
-        //PRINT(x);
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        unsigned tmp=number->GetValue();
+        turtle_draw_circle(tmp);
+        PRINT1("mphka sthn NumberObject circle");
     }
     
     Circle2(){}
 };
 
-class PenSize : public Objects {
+class PenSize2{
 public:
-    PenSize(int x){
-        //turtle_mv_backward(x)
-        cout << "PenSize is" << x << endl;
+    PenSize2(float x){
+        set_pen_thickness(x)
+        PRINT1("mphka sthn foat PenSize");
     }
  
     
-    PenSize(Objects x){
-        //turtle_mv_backward(x)
-        //PRINT(x);
+    PenSize2(Objects x){
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        float tmp=number->GetValue();
+        set_pen_thickness(tmp);
+        PRINT1("mphka sthn NumberObject PenSize ");
     }
     
-    PenSize(){}
+    PenSize2(){}
 };
 
-class PenDown : public Objects {
+class PenDown2{
 public:
-    PenDown(){}
+    PenDown2(){
+        
+        pen_down()
+        PRINT1("mphka sthn pendown");
+    }
+        
+    
 };
 
-class PenUp : public Objects {
+class PenUp2 {
 public:
-    PenUp(){}
+    PenUp2(){
+        
+        pen_up()
+        PRINT1("mphka sthn penup");
+    }
+};
+
+string my_str = "Hello, World";
+const char* conv_my_str = my_str.c_str();
+
+class Print2 {
+public:
+    Print2(char const *text){
+        turtle_draw_label(text)
+        PRINT1("mphka sthn char const print");
+        
+    }
+    
+    Print2(Objects x){
+       // PRINT1(x->GetValue().c_str());
+        WordObject* number = static_cast<WordObject*>(&x);
+        char const* tmp=number->GetValue().c_str();
+        PRINT1(tmp);
+        
+        turtle_draw_label(tmp);
+        PRINT1("mphka sthn WordObject print");
+    }
+    
+    Print2(){}
 };
 
 
@@ -448,7 +511,7 @@ bool operator== (Objects object ,  Objects x){
         return boolean->GetValue() == boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -471,7 +534,7 @@ bool operator>= (Objects object ,  Objects x){
         return boolean->GetValue() >= boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -494,7 +557,7 @@ bool operator<= (Objects object ,  Objects x){
         return boolean->GetValue() <= boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -517,7 +580,7 @@ bool operator!= (Objects object ,  Objects x){
         return boolean->GetValue() != boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -541,7 +604,7 @@ bool operator> (Objects object ,  Objects x){
         return boolean->GetValue() > boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -565,7 +628,7 @@ bool operator< (Objects object ,  Objects x){
         return boolean->GetValue() < boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -807,25 +870,52 @@ ostream& PrintLists(ostream& output , ListObject* list){
 }
 
 
-template<typename T, typename T1>
-Objects   geter(T a, T1 b) {
+
+Objects  geter(vector<int>  a, Objects b) {
     Objects obj;
     ArrayObject* array = static_cast<ArrayObject*>(&b);
-    PRINT(a);
-    PRINT(array->GetValue().size());
     
-    for(int i=0;i<array->GetValue().size();i++){
-        //cout<<"for"<<endl;
-        
-        if(i==a-1){
-            //cout<<"mphka"<<endl;
-            //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
-           // cout<<array->GetValue()<<endl;
-            return array->GetValue()[i];
-        }
+    
+    if(a.size() == 1) {
+        return array->GetValue()[a[0] - 1];
     }
-    return obj;
+    
+    
+    else {
+        cout << a[0] << endl;
+        vector<Objects> temp;
+        temp = array->GetValue();
+        Objects tempObject = temp[a[0] - 1];
+        
+        if(tempObject.getId() != "array") {
+            cout << "Trying to Index non array element" << endl;
+            exit(3);
+        }
+        
+        a.erase(a.begin());
+        cout << a[0] << endl;
+        return geter(a , tempObject);
+    }
 }
+//template<typename T, typename T1>
+//Objects   geter(T a, T1 b) {
+//    Objects obj;
+//    ArrayObject* array = static_cast<ArrayObject*>(&b);
+//    PRINT1(a);
+//    PRINT1(array->GetValue().size());
+//
+//    for(int i=0;i<array->GetValue().size();i++){
+//        //cout<<"for"<<endl;
+//
+//        if(i==a-1){
+//            //cout<<"mphka"<<endl;
+//            //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
+//           // cout<<array->GetValue()<<endl;
+//            return array->GetValue()[i];
+//        }
+//    }
+//    return obj;
+//}
 
 
 void  seter(int  a, Objects &b, Objects c) {
