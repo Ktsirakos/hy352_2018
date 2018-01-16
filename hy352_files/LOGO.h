@@ -69,8 +69,8 @@
 
 
 
-#define SETPENCOLOR  SetPenColor2() = LIST 
-#define SETSCREENCOLOR  SetScreenColor2() = LIST 
+#define SETPENCOLOR  ;SetPenColor2() = LIST
+#define SETSCREENCOLOR  ;SetScreenColor2() = LIST
 #define FORWARD ;Forward2()=
 #define BACK ;Back2()=
 #define RIGHT ;Right2()=
@@ -81,9 +81,7 @@
 #define PENUP ;PenUp2()
 #define CENTER ;Center2()
 #define PRINT ;Print2()=
-#define SETXY  SetXY2() = LIST 
-
-
+#define SETXY  ;SetXY2() = LIST
 
 using namespace std;
 
@@ -1213,7 +1211,7 @@ T add(T first, Args... args) {
 }
 
 
-vector<Objects>subvec;
+vector<Objects> subvec;
 
 template<typename T>
 Objects sub(T v) {
@@ -1225,7 +1223,8 @@ Objects sub(T v) {
             break;
         }else if(i==0){
 
-            u=subvec[i]-subvec[++i];
+            u=subvec[i]-subvec[i+1];
+            i++;
         }else{
             
             u=u-subvec[i];
@@ -1234,6 +1233,7 @@ Objects sub(T v) {
     }
     
     u=u-v;
+    subvec.clear();
     
     return u;
     
@@ -1268,7 +1268,8 @@ Objects divi(T v) {
             break;
         }else if(i==0){
             
-            u=divvec[i]/divvec[++i];
+            u=divvec[i]/divvec[i+1];
+            i++;
         }else{
             
             u=u/divvec[i];
@@ -1277,7 +1278,7 @@ Objects divi(T v) {
     }
     
     u=u/v;
-    
+    divvec.clear();
     return u;
     
 }
@@ -1300,7 +1301,8 @@ Objects mod(T v) {
             break;
         }else if(i==0){
             
-            u=modvec[i]%modvec[++i];
+            u=modvec[i]%modvec[i+1];
+            i++;
         }else{
             
             u=u%modvec[i];
@@ -1309,6 +1311,7 @@ Objects mod(T v) {
     }
     
     u=u%v;
+    modvec.clear();
     
     return u;
     

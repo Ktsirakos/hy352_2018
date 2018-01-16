@@ -7,9 +7,7 @@
 //
 
 #include "hy352_gui.h"
-#ifdef APPLE
 #include <allegro5/allegro.h>
-#endif
 #include <stdarg.h>
 #include <iostream>
 #include <string>
