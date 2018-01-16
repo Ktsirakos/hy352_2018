@@ -5,7 +5,7 @@
 #include <sstream>
 
 
-#define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(0);\
+#define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(NumberObject(0));\
                                                         __iter.push_back(false);\
                                                     init_GUI();\
 
@@ -88,27 +88,6 @@
 using namespace std;
 
 
-vector<int>__count;
-vector<bool>__iter;
-
-void enter_if(){
-    __count.push_back(REPCOUNT);
-    __iter.push_back(false);
-    
-}
-
-void enter_iter(){
-    __count.push_back(0);
-    __iter.push_back(true);
-}
-
-void increase(){
-    if(__iter[__iter.size()-1]){
-        REPCOUNT++;
-    }
-    
-}
-
 
 class Objects {
 private:
@@ -184,6 +163,12 @@ public:
 
         virtual void setId(){};
 
+
+		Objects& operator++(int x) {
+			this->number++;
+			return *this;
+		}
+
         static void CopyObject(Objects* dest , Objects a){
             dest->id = a.id;
             dest->word = a.word;
@@ -203,6 +188,8 @@ public:
         Objects(){};
         
 };
+
+
 
 
 
@@ -236,6 +223,30 @@ public:
         };
 
 };
+
+
+vector<Objects> __count;
+vector<bool>__iter;
+
+void enter_if(){
+    __count.push_back(REPCOUNT);
+    __iter.push_back(false);
+    
+
+}
+
+void enter_iter(){
+	 Objects number = *(new NumberObject()) = 0;
+    __count.push_back(number);
+    __iter.push_back(true);
+}
+
+void increase(){
+    if(__iter[__iter.size()-1]){
+        REPCOUNT++;
+    }
+    
+}
 
 
 class WordObject : public Objects {
