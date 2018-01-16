@@ -35,3 +35,9 @@ LOGO\.vcxproj\.user
 *.config
 
 hy352_files/hy352_files/test
+
+packages/
+
+\.vs/
+
+LOGO\.sln
