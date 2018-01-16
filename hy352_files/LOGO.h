@@ -53,7 +53,7 @@
 #define WHILE i;){} while(
 #define TIMES ;i++
 #define FOREACH ;enter_iter();for(Objects& ___items :
-#define SHOW    Show() = false?Objects()
+#define SHOW    ;Show() = false?Objects()
 #define ELEM ___items
 #define REPCOUNT __count[__count.size()-1]
 
@@ -69,19 +69,19 @@
 
 
 
-#define FORWARD Forward2()=
-#define BACK Back2()=
-#define RIGHT Right2()=
-#define LEFT Left2()=
-#define CIRCLE Circle2()=
-#define SETPENSIZE PenSize2()=
-#define PENDOWN PenDown2()
-#define PENUP PenUp2()
-#define CENTER Center2()
-#define PRINT Print2()=
-#define SETXY  SetXY2() = LIST 
 #define SETPENCOLOR  SetPenColor2() = LIST 
 #define SETSCREENCOLOR  SetScreenColor2() = LIST 
+#define FORWARD ;Forward2()=
+#define BACK ;Back2()=
+#define RIGHT ;Right2()=
+#define LEFT ;Left2()=
+#define CIRCLE ;Circle2()=
+#define SETPENSIZE ;PenSize2()=
+#define PENDOWN ;PenDown2()
+#define PENUP ;PenUp2()
+#define CENTER ;Center2()
+#define PRINT ;Print2()=
+#define SETXY  SetXY2() = LIST 
 
 
 
@@ -1040,6 +1040,11 @@ class Show {
         _x = x;
         cout << x << endl;
 
+    }
+    
+    Show(int x){
+        cout << x << endl;
+        
     }
 };
 
