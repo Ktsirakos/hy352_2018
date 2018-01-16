@@ -21,3 +21,17 @@ a.exe.stackdump
 
 \.vscode/
 >>>>>>> dfe56a4783c758b89ec859cabe6425f2af82979e
+
+Debug/
+
+*.vcxproj
+
+*.filters
+
+*.log
+
+LOGO\.vcxproj\.user
+
+*.config
+
+hy352_files/hy352_files/test

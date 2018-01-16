@@ -5,12 +5,13 @@
 #include <sstream>
 
 
-#define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(0);\
+#define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(NumberObject(0));\
                                                         __iter.push_back(false);\
                                                     init_GUI();\
+													vector<Objects> vec;
 
                                           
-#define END_PROGRAMM ;destroy_GUI();  return 0; }
+#define END_PROGRAMM ;destroy_GUI(); return 0; }
 
 #define WORD   *(new WordObject()) = false? "u should'n see this message" 
 #define MAKE ;Objects 
@@ -20,7 +21,7 @@
 
 #define BOOLEAN *(new BooleanObject()) =false? false 
 #define LIST    (*(new ListObject())) 
-#define ARRAY  (*(new ArrayObject())).vec  =
+#define ARRAY  (*(new ArrayObject()))  = vec = 
 
 #define TRUE true 
 #define FALSE false
@@ -53,7 +54,7 @@
 #define WHILE i;){} while(
 #define TIMES ;i++
 #define FOREACH ;enter_iter();for(Objects& ___items :
-#define SHOW    Show() = false?Objects()
+#define SHOW    ;Show() = false?Objects()
 #define ELEM ___items
 #define REPCOUNT __count[__count.size()-1]
 
@@ -69,42 +70,22 @@
 
 
 
-#define FORWARD Forward2()=
-#define BACK Back2()=
-#define RIGHT Right2()=
-#define LEFT Left2()=
-#define CIRCLE Circle2()=
-#define SETPENSIZE PenSize2()=
-#define PENDOWN PenDown2()
-#define PENUP PenUp2()
-#define CENTER Center2()
-#define PRINT Print2()=
-
-
+#define SETPENCOLOR  ;SetPenColor2() = LIST
+#define SETSCREENCOLOR  ;SetScreenColor2() = LIST
+#define FORWARD ;Forward2()=
+#define BACK ;Back2()=
+#define RIGHT ;Right2()=
+#define LEFT ;Left2()=
+#define CIRCLE ;Circle2()=
+#define SETPENSIZE ;PenSize2()=
+#define PENDOWN ;PenDown2()
+#define PENUP ;PenUp2()
+#define CENTER ;Center2()
+#define PRINT ;Print2()=
+#define SETXY  ;SetXY2() = LIST
 
 using namespace std;
 
-
-vector<int>__count;
-vector<bool>__iter;
-
-void enter_if(){
-    __count.push_back(REPCOUNT);
-    __iter.push_back(false);
-    
-}
-
-void enter_iter(){
-    __count.push_back(0);
-    __iter.push_back(true);
-}
-
-void increase(){
-    if(__iter[__iter.size()-1]){
-        REPCOUNT++;
-    }
-    
-}
 
 
 class Objects {
@@ -181,6 +162,12 @@ public:
 
         virtual void setId(){};
 
+
+		Objects& operator++(int x) {
+			this->number++;
+			return *this;
+		}
+
         static void CopyObject(Objects* dest , Objects a){
             dest->id = a.id;
             dest->word = a.word;
@@ -200,6 +187,8 @@ public:
         Objects(){};
         
 };
+
+
 
 
 
@@ -233,6 +222,30 @@ public:
         };
 
 };
+
+
+vector<Objects> __count;
+vector<bool>__iter;
+
+void enter_if(){
+    __count.push_back(REPCOUNT);
+    __iter.push_back(false);
+    
+
+}
+
+void enter_iter(){
+	 Objects number = *(new NumberObject()) = 0;
+    __count.push_back(number);
+    __iter.push_back(true);
+}
+
+void increase(){
+    if(__iter[__iter.size()-1]){
+        REPCOUNT++;
+    }
+    
+}
 
 
 class WordObject : public Objects {
@@ -320,6 +333,10 @@ public:
 
 
     ArrayObject(){ setId(); }
+
+	ArrayObject(vector<Objects> x) {
+		setList(x); setId(); 
+	}
 };
 
 
@@ -386,6 +403,7 @@ public:
 
 class Left2 {
 public:
+
     Left2(int x){
         turtle_rotate(-x)
         PRINT1("mphka sthn int left")
@@ -394,7 +412,7 @@ public:
     Left2(Objects x){
         NumberObject* number = static_cast<NumberObject*>(&x);
         int tmp=number->GetValue();
-        turtle_rotate(tmp);
+        turtle_rotate(-tmp);
         //PRINT(x);
         PRINT1("mphka sthn NumberObject left");
     }
@@ -758,6 +776,18 @@ public:
 };
 
 
+
+//ArrayObject  operator,(vector<Objects> a , vector<Objects>  b){
+//
+//	for (int i = 0; i < b.size(); i++) {
+//		a.push_back(b[i]);
+//	}
+//
+//
+//    return a;
+//}
+
+
 vector<Objects>  operator,(ListObject c , vector<Objects>  myvec){
     myvec.push_back(c);
     return myvec;
@@ -877,7 +907,10 @@ Objects  geter(vector<int>  a, Objects b) {
     
     
     if(a.size() == 1) {
-        return array->GetValue()[a[0] - 1];
+		vector<Objects> temp;
+        temp = array->GetValue();
+        Objects tempObject = temp[a[0] - 1];
+        return tempObject;
     }
     
     
@@ -1038,8 +1071,119 @@ class Show {
         cout << x << endl;
 
     }
+    
+    Show(int x){
+        cout << x << endl;
+        
+    }
 };
 
+
+class SetXY2 {
+public:
+	SetXY2() {}
+
+	SetXY2(ListObject list) {
+
+		if (list.GetValue().size() != 2) {
+			cout << "Exactly 2 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" || list.GetValue()[1].getId() != "number") {
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+
+		turtle_go_to_position(number1->GetValue(), number2->GetValue());
+
+	}
+
+};
+
+
+
+class SetPenColor2 {
+public:
+	SetPenColor2() {}
+
+	SetPenColor2(ListObject list) {
+
+				if (list.GetValue().size() != 3) {
+			cout << "Exactly 3 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" ||
+			list.GetValue()[1].getId() != "number" ||
+			list.GetValue()[2].getId() != "number") {
+
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+		NumberObject* number3;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+		number3 = static_cast<NumberObject*>(&vec[2]);
+
+		set_pen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
+	}
+	
+};
+
+
+
+class SetScreenColor2 {
+public:
+	SetScreenColor2() {}
+
+	SetScreenColor2(ListObject list) {
+
+		if (list.GetValue().size() != 3) {
+			cout << "Exactly 3 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" ||
+			list.GetValue()[1].getId() != "number" ||
+			list.GetValue()[2].getId() != "number") {
+
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+		NumberObject* number3;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+		number3 = static_cast<NumberObject*>(&vec[2]);
+
+		set_screen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
+
+	}
+
+};
 
 ostream& operator<< (ostream& output , Show x){
             output << x._x << endl;
@@ -1099,7 +1243,7 @@ T add(T first, Args... args) {
 }
 
 
-vector<Objects>subvec;
+vector<Objects> subvec;
 
 template<typename T>
 Objects sub(T v) {
@@ -1111,7 +1255,8 @@ Objects sub(T v) {
             break;
         }else if(i==0){
 
-            u=subvec[i]-subvec[++i];
+            u=subvec[i]-subvec[i+1];
+            i++;
         }else{
             
             u=u-subvec[i];
@@ -1120,6 +1265,7 @@ Objects sub(T v) {
     }
     
     u=u-v;
+    subvec.clear();
     
     return u;
     
@@ -1154,7 +1300,8 @@ Objects divi(T v) {
             break;
         }else if(i==0){
             
-            u=divvec[i]/divvec[++i];
+            u=divvec[i]/divvec[i+1];
+            i++;
         }else{
             
             u=u/divvec[i];
@@ -1163,7 +1310,7 @@ Objects divi(T v) {
     }
     
     u=u/v;
-    
+    divvec.clear();
     return u;
     
 }
@@ -1186,7 +1333,8 @@ Objects mod(T v) {
             break;
         }else if(i==0){
             
-            u=modvec[i]%modvec[++i];
+            u=modvec[i]%modvec[i+1];
+            i++;
         }else{
             
             u=u%modvec[i];
@@ -1195,6 +1343,7 @@ Objects mod(T v) {
     }
     
     u=u%v;
+    modvec.clear();
     
     return u;
     

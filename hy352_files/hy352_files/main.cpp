@@ -48,16 +48,14 @@ MAKE integer =  NUMBER:70
 
     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
     MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
-    cout << integer <<  endl;
-    cout << word << endl;
-    cout << boolean << endl;
-    cout << list << endl;
-    cout << array << endl;
+    SHOW:integer
+    SHOW:word
+    SHOW:boolean
+    SHOW:list
+    SHOW:array
+    SHOW:x
 
-
-SHOW:x;
-
-x=ITEM({1}, array);
+//x=ITEM({1}, array);
 
 SHOW:x
 IF OR(x==integer,integer==(NUMBER:20) ,boolean == (BOOLEAN: FALSE)) DO
@@ -74,22 +72,44 @@ PRINT1("mphka sthn end");
 END
 ASSIGN x=SUM(x,x,NUMBER:40,x,NUMBER:40,NUMBER:40);
 
-//x=word;
-PRINT("===========");
+
+MAKE myMoves = ARRAY
+{
+    ARRAY {WORD: "FORWARD", NUMBER: 100},
+                     LIST [WORD: "LEFT", NUMBER: 90],
+                     LIST [WORD: "FORWARD", NUMBER: 100]
+};
+
+
+
+MAKE re=NUMBER:2000
+SHOW:re
+//re=WORD:"thamosssss";
+SHOW:re
+//MAKE z1 = word1==word;
+//
 SHOW:word1;
+
+
+
+PENUP
+SETSCREENCOLOR [NUMBER:255 , NUMBER:100 , NUMBER:0]
+SETXY[NUMBER:100,  NUMBER:100];
+
+
 //;FORWARD 10;
-FORWARD ITEM({1}, array);
-FORWARD NUMBER:50;
+//FORWARD ITEM({1}, array)
+//FORWARD NUMBER:50
 //BACK 500;
-BACK NUMBER:1000;
+//BACK NUMBER:1000
 //CIRCLE 10;
 //CIRCLE NUMBER:100;
 //CENTER;
-SETPENSIZE 100;
+//SETPENSIZE 100
 //CIRCLE NUMBER:100;
 //
-//PRINT WORD:"Thanossssssssssssssssss"
-PRINT "thanossssssssssssssssss"
+//PRINT WORD:"Thanossss"
+//PRINT "thanossssssssssssssssss"
 
 
 //PRINT("===========");
@@ -97,15 +117,14 @@ PRINT "thanossssssssssssssssss"
 //
 ////cout << "=================\n";
 ////
-////REPEAT 5 TIMES DO
-////REPCOUNT;
-////PRINT(REPCOUNT)
-////    REPEAT 5 TIMES DO
-////    REPCOUNT;
-////    //PRINT(REPCOUNT);
-////    cout<<REPCOUNT;
-////    END
-////END
+REPEAT 5 TIMES DO
+REPCOUNT
+PRINT1(REPCOUNT);
+    REPEAT 5 TIMES DO
+    REPCOUNT
+    PRINT1(REPCOUNT);
+    END
+END
 ////cout << "=================\n";
 //
 //
@@ -120,20 +139,23 @@ PRINT "thanossssssssssssssssss"
 ////ENDs
 ////PRINT(r);
 ////x != NUMBER:19
-//MAKE k = SUM (PRODUCT (x,NUMBER: 12,x),x,x,NUMBER:40,x,PRODUCT (x,NUMBER: 12,x),NUMBER:40,NUMBER:40,PRODUCT (x,NUMBER: 12,x))
-//PRINT(k);
-//MAKE q = DIFFERENCE (integer,NUMBER:40,x,x,x,NUMBER:40)
-//PRINT(q);
-//
-//MAKE z = PRODUCT (x,NUMBER: 12,x)
-////PRINT(z);
-//
-//MAKE v4 = QUOTIENT (x,NUMBER:5,x)
-//PRINT(v4);
-//
+MAKE k = SUM (x,x,NUMBER:40,x,NUMBER:40,NUMBER:40)
+SHOW:k
+
+MAKE ke = SUM (x,x,NUMBER:40,x,NUMBER:40,NUMBER:40)
+SHOW:ke
+
+MAKE q = DIFFERENCE(integer,NUMBER:40,x,x,x)
+SHOW:q
+//SHOW:x
+MAKE ze = PRODUCT (QUOTIENT(NUMBER:12,NUMBER:6,NUMBER:2),x,NUMBER: 12)
+SHOW:ze
+MAKE v4 = QUOTIENT(NUMBER:12,NUMBER:6,NUMBER:2)
+SHOW:v4
 //
 //MAKE v5 = MODULO (x,NUMBER:12,x,x,NUMBER:7,NUMBER:4)
-//PRINT(v5);
+//SHOW:v5
+
 ////MAKE list1 = LIST [ NUMBER: 10 , NUMBER :20 , NUMBER:40]
 ////PRINT(list1)
 ////
