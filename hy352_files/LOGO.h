@@ -4,22 +4,24 @@
 #include <string>
 #include <sstream>
 
-#define START_PROGRAMM using namespace std; int main (){  __count.push_back(0);\
-                                                        __iter.push_back(false); \
-                                                        void nothing(); \
-                                                        vector<Objects> dummy; \
 
-#define END_PROGRAMM ;return 0; }
+#define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(NumberObject(0));\
+                                                        __iter.push_back(false);\
+                                                    init_GUI();\
+													vector<Objects> vec;
+
+                                          
+#define END_PROGRAMM ;destroy_GUI(); return 0; }
 
 #define WORD   *(new WordObject()) = false? "u should'n see this message" 
 #define MAKE ;Objects 
-#define PRINT(x) ;cout << x << endl;
+#define PRINT1(x) ;cout << x << endl;
 
 #define NUMBER *(new NumberObject()) = 0?  -10000
 
 #define BOOLEAN *(new BooleanObject()) =false? false 
 #define LIST    (*(new ListObject())) 
-#define ARRAY  (*(new ArrayObject())).vec  =
+#define ARRAY  (*(new ArrayObject()))  = vec = 
 
 #define TRUE true 
 #define FALSE false
@@ -52,8 +54,8 @@
 #define WHILE i;){} while(
 #define TIMES ;i++
 #define FOREACH ;enter_iter();for(Objects& ___items :
-#define SHOW    Show() = false?Objects()
-#define ELEM ___items)
+#define SHOW    ;Show() = false?Objects()
+#define ELEM ___items
 #define REPCOUNT __count[__count.size()-1]
 
 
@@ -68,41 +70,22 @@
 
 
 
-#define FORWARD Forward2()=
-#define BACK Back2()=
-#define RIGHT Right2()=
-#define LEFT Left2()=
-#define CIRCLE Circle2()=
-#define SETPENSIZE PenSize2()=
-#define PENDOWN PenDown2()
-#define PENUP PenUp2()
-#define CENTER Center2()
-
-
+#define SETPENCOLOR  ;SetPenColor2() = LIST
+#define SETSCREENCOLOR  ;SetScreenColor2() = LIST
+#define FORWARD ;Forward2()=
+#define BACK ;Back2()=
+#define RIGHT ;Right2()=
+#define LEFT ;Left2()=
+#define CIRCLE ;Circle2()=
+#define SETPENSIZE ;PenSize2()=
+#define PENDOWN ;PenDown2()
+#define PENUP ;PenUp2()
+#define CENTER ;Center2()
+#define PRINT ;Print2()=
+#define SETXY  ;SetXY2() = LIST
 
 using namespace std;
 
-
-vector<int>__count;
-vector<bool>__iter;
-
-void enter_if(){
-    __count.push_back(REPCOUNT);
-    __iter.push_back(false);
-    
-}
-
-void enter_iter(){
-    __count.push_back(0);
-    __iter.push_back(true);
-}
-
-void increase(){
-    if(__iter[__iter.size()-1]){
-        REPCOUNT++;
-    }
-    
-}
 
 
 class Objects {
@@ -179,6 +162,12 @@ public:
 
         virtual void setId(){};
 
+
+		Objects& operator++(int x) {
+			this->number++;
+			return *this;
+		}
+
         static void CopyObject(Objects* dest , Objects a){
             dest->id = a.id;
             dest->word = a.word;
@@ -198,6 +187,8 @@ public:
         Objects(){};
         
 };
+
+
 
 
 
@@ -231,6 +222,30 @@ public:
         };
 
 };
+
+
+vector<Objects> __count;
+vector<bool>__iter;
+
+void enter_if(){
+    __count.push_back(REPCOUNT);
+    __iter.push_back(false);
+    
+
+}
+
+void enter_iter(){
+	 Objects number = *(new NumberObject()) = 0;
+    __count.push_back(number);
+    __iter.push_back(true);
+}
+
+void increase(){
+    if(__iter[__iter.size()-1]){
+        REPCOUNT++;
+    }
+    
+}
 
 
 class WordObject : public Objects {
@@ -318,35 +333,50 @@ public:
 
 
     ArrayObject(){ setId(); }
+
+	ArrayObject(vector<Objects> x) {
+		setList(x); setId(); 
+	}
 };
 
 
 class Forward2{
 public:
-    Forward2(int x){
-        //turtle_mv_forward(x)
-        cout << "Forward step" << x << endl;
+    Forward2(float x){
+        turtle_mv_forward(x);
+        PRINT1("mphka sthn float forward");
     }
     
-    Forward2(NumberObject x){
-        //turtle_mv_forward(x)
+    Forward2(Objects x){
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        float tmp=number->GetValue();
+        turtle_mv_forward(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject forward");
     }
     
-    Forward2(){}
+    Forward2(){
+        
+        
+        
+    }
 };
 
 
 class Back2{
 public:
-    Back2(int x){
-        //turtle_mv_backward(x)
-        cout << "Back step" << x << endl;
+    Back2(float x){
+        turtle_mv_backward(x)
+        PRINT1("mphka sthn float back");
+        
     }
     
     Back2(Objects x){
-        //turtle_mv_backward(x)
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        float tmp=number->GetValue();
+        turtle_mv_backward(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject back");
     }
     
     Back2(){}
@@ -356,13 +386,16 @@ public:
 class Right2{
 public:
     Right2(int x){
-        //turtle_mv_backward(x)
-        cout << "Right step" << x << endl;
+        turtle_rotate(x)
+        PRINT1("mphka sthn int right")
     }
     
     Right2(Objects x){
-        //turtle_mv_backward(x)
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        int tmp=number->GetValue();
+        turtle_rotate(tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject riht");
     }
     
     Right2(){}
@@ -370,14 +403,18 @@ public:
 
 class Left2 {
 public:
+
     Left2(int x){
-        //turtle_mv_backward(x)
-        cout << "Left step" << x << endl;
+        turtle_rotate(-x)
+        PRINT1("mphka sthn int left")
     }
     
     Left2(Objects x){
-        //turtle_mv_backward(x)
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        int tmp=number->GetValue();
+        turtle_rotate(-tmp);
         //PRINT(x);
+        PRINT1("mphka sthn NumberObject left");
     }
     
     Left2(){}
@@ -386,49 +423,91 @@ public:
 class Center2{
 public:
     
-    Center2(){}
+    Center2(){
+        PRINT1("mphka sthn center");
+        turtle_go_to_center();
+        
+    }
 };
 
 
 class Circle2{
 public:
-    Circle2(int x){
-        //turtle_mv_backward(x)
-        cout << "Circle step" << x << endl;
+    Circle2(unsigned x){
+        turtle_draw_circle(x)
+        PRINT1("mphka sthn unsigned circle");
     }
     
     Circle2(Objects x){
-        //turtle_mv_backward(x)
-        //PRINT(x);
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        unsigned tmp=number->GetValue();
+        turtle_draw_circle(tmp);
+        PRINT1("mphka sthn NumberObject circle");
     }
     
     Circle2(){}
 };
 
-class PenSize : public Objects {
+class PenSize2{
 public:
-    PenSize(int x){
-        //turtle_mv_backward(x)
-        cout << "PenSize is" << x << endl;
+    PenSize2(float x){
+        set_pen_thickness(x)
+        PRINT1("mphka sthn foat PenSize");
     }
  
     
-    PenSize(Objects x){
-        //turtle_mv_backward(x)
-        //PRINT(x);
+    PenSize2(Objects x){
+        NumberObject* number = static_cast<NumberObject*>(&x);
+        float tmp=number->GetValue();
+        set_pen_thickness(tmp);
+        PRINT1("mphka sthn NumberObject PenSize ");
     }
     
-    PenSize(){}
+    PenSize2(){}
 };
 
-class PenDown : public Objects {
+class PenDown2{
 public:
-    PenDown(){}
+    PenDown2(){
+        
+        pen_down()
+        PRINT1("mphka sthn pendown");
+    }
+        
+    
 };
 
-class PenUp : public Objects {
+class PenUp2 {
 public:
-    PenUp(){}
+    PenUp2(){
+        
+        pen_up()
+        PRINT1("mphka sthn penup");
+    }
+};
+
+string my_str = "Hello, World";
+const char* conv_my_str = my_str.c_str();
+
+class Print2 {
+public:
+    Print2(char const *text){
+        turtle_draw_label(text)
+        PRINT1("mphka sthn char const print");
+        
+    }
+    
+    Print2(Objects x){
+       // PRINT1(x->GetValue().c_str());
+        WordObject* number = static_cast<WordObject*>(&x);
+        char const* tmp=number->GetValue().c_str();
+        PRINT1(tmp);
+        
+        turtle_draw_label(tmp);
+        PRINT1("mphka sthn WordObject print");
+    }
+    
+    Print2(){}
 };
 
 
@@ -450,7 +529,7 @@ bool operator== (Objects object ,  Objects x){
         return boolean->GetValue() == boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -473,7 +552,7 @@ bool operator>= (Objects object ,  Objects x){
         return boolean->GetValue() >= boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -496,7 +575,7 @@ bool operator<= (Objects object ,  Objects x){
         return boolean->GetValue() <= boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -519,7 +598,7 @@ bool operator!= (Objects object ,  Objects x){
         return boolean->GetValue() != boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -543,7 +622,7 @@ bool operator> (Objects object ,  Objects x){
         return boolean->GetValue() > boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -567,7 +646,7 @@ bool operator< (Objects object ,  Objects x){
         return boolean->GetValue() < boolean1->GetValue();
     }
     
-    PRINT("den ekanes kalh sugrish");
+    PRINT1("den ekanes kalh sugrish");
     exit(3);
     return false;
 }
@@ -697,6 +776,18 @@ public:
 };
 
 
+
+//ArrayObject  operator,(vector<Objects> a , vector<Objects>  b){
+//
+//	for (int i = 0; i < b.size(); i++) {
+//		a.push_back(b[i]);
+//	}
+//
+//
+//    return a;
+//}
+
+
 vector<Objects>  operator,(ListObject c , vector<Objects>  myvec){
     myvec.push_back(c);
     return myvec;
@@ -809,25 +900,55 @@ ostream& PrintLists(ostream& output , ListObject* list){
 }
 
 
-template<typename T, typename T1>
-Objects   geter(T a, T1 b) {
+
+Objects  geter(vector<int>  a, Objects b) {
     Objects obj;
     ArrayObject* array = static_cast<ArrayObject*>(&b);
-    PRINT(a);
-    PRINT(array->GetValue().size());
     
-    for(int i=0;i<array->GetValue().size();i++){
-        //cout<<"for"<<endl;
-        
-        if(i==a-1){
-            //cout<<"mphka"<<endl;
-            //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
-           // cout<<array->GetValue()<<endl;
-            return array->GetValue()[i];
-        }
+    
+    if(a.size() == 1) {
+		vector<Objects> temp;
+        temp = array->GetValue();
+        Objects tempObject = temp[a[0] - 1];
+        return tempObject;
     }
-    return obj;
+    
+    
+    else {
+        cout << a[0] << endl;
+        vector<Objects> temp;
+        temp = array->GetValue();
+        Objects tempObject = temp[a[0] - 1];
+        
+        if(tempObject.getId() != "array") {
+            cout << "Trying to Index non array element" << endl;
+            exit(3);
+        }
+        
+        a.erase(a.begin());
+        cout << a[0] << endl;
+        return geter(a , tempObject);
+    }
 }
+//template<typename T, typename T1>
+//Objects   geter(T a, T1 b) {
+//    Objects obj;
+//    ArrayObject* array = static_cast<ArrayObject*>(&b);
+//    PRINT1(a);
+//    PRINT1(array->GetValue().size());
+//
+//    for(int i=0;i<array->GetValue().size();i++){
+//        //cout<<"for"<<endl;
+//
+//        if(i==a-1){
+//            //cout<<"mphka"<<endl;
+//            //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
+//           // cout<<array->GetValue()<<endl;
+//            return array->GetValue()[i];
+//        }
+//    }
+//    return obj;
+//}
 
 
 void  seter(int  a, Objects &b, Objects c) {
@@ -950,8 +1071,119 @@ class Show {
         cout << x << endl;
 
     }
+    
+    Show(int x){
+        cout << x << endl;
+        
+    }
 };
 
+
+class SetXY2 {
+public:
+	SetXY2() {}
+
+	SetXY2(ListObject list) {
+
+		if (list.GetValue().size() != 2) {
+			cout << "Exactly 2 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" || list.GetValue()[1].getId() != "number") {
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+
+		turtle_go_to_position(number1->GetValue(), number2->GetValue());
+
+	}
+
+};
+
+
+
+class SetPenColor2 {
+public:
+	SetPenColor2() {}
+
+	SetPenColor2(ListObject list) {
+
+				if (list.GetValue().size() != 3) {
+			cout << "Exactly 3 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" ||
+			list.GetValue()[1].getId() != "number" ||
+			list.GetValue()[2].getId() != "number") {
+
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+		NumberObject* number3;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+		number3 = static_cast<NumberObject*>(&vec[2]);
+
+		set_pen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
+	}
+	
+};
+
+
+
+class SetScreenColor2 {
+public:
+	SetScreenColor2() {}
+
+	SetScreenColor2(ListObject list) {
+
+		if (list.GetValue().size() != 3) {
+			cout << "Exactly 3 arguments expected!" << endl;
+			exit(3);
+		}
+
+
+		if (list.GetValue()[0].getId() != "number" ||
+			list.GetValue()[1].getId() != "number" ||
+			list.GetValue()[2].getId() != "number") {
+
+			cout << "Invalid arguments" << endl;
+			exit(3);
+		}
+
+
+		NumberObject* number1;
+		NumberObject* number2;
+		NumberObject* number3;
+
+		vector<Objects> vec = list.GetValue();
+		number1 = static_cast<NumberObject*>(&vec[0]);
+		number2 = static_cast<NumberObject*>(&vec[1]);
+		number3 = static_cast<NumberObject*>(&vec[2]);
+
+		set_screen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
+
+	}
+
+};
 
 ostream& operator<< (ostream& output , Show x){
             output << x._x << endl;
@@ -1011,7 +1243,7 @@ T add(T first, Args... args) {
 }
 
 
-vector<Objects>subvec;
+vector<Objects> subvec;
 
 template<typename T>
 Objects sub(T v) {
@@ -1023,7 +1255,8 @@ Objects sub(T v) {
             break;
         }else if(i==0){
 
-            u=subvec[i]-subvec[++i];
+            u=subvec[i]-subvec[i+1];
+            i++;
         }else{
             
             u=u-subvec[i];
@@ -1032,6 +1265,7 @@ Objects sub(T v) {
     }
     
     u=u-v;
+    subvec.clear();
     
     return u;
     
@@ -1066,7 +1300,8 @@ Objects divi(T v) {
             break;
         }else if(i==0){
             
-            u=divvec[i]/divvec[++i];
+            u=divvec[i]/divvec[i+1];
+            i++;
         }else{
             
             u=u/divvec[i];
@@ -1075,7 +1310,7 @@ Objects divi(T v) {
     }
     
     u=u/v;
-    
+    divvec.clear();
     return u;
     
 }
@@ -1098,7 +1333,8 @@ Objects mod(T v) {
             break;
         }else if(i==0){
             
-            u=modvec[i]%modvec[++i];
+            u=modvec[i]%modvec[i+1];
+            i++;
         }else{
             
             u=u%modvec[i];
@@ -1107,6 +1343,7 @@ Objects mod(T v) {
     }
     
     u=u%v;
+    modvec.clear();
     
     return u;
     
