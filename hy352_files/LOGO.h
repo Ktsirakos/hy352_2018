@@ -806,24 +806,31 @@ ostream& PrintLists(ostream& output , ListObject* list){
 }
 
 
-template<typename T, typename T1>
-Objects   geter(T a, T1 b) {
+Objects  geter(vector<int>  a, Objects b) {
     Objects obj;
     ArrayObject* array = static_cast<ArrayObject*>(&b);
-    PRINT(a);
-    PRINT(array->GetValue().size());
     
-    for(int i=0;i<array->GetValue().size();i++){
-        //cout<<"for"<<endl;
-        
-        if(i==a-1){
-            //cout<<"mphka"<<endl;
-            //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
-           // cout<<array->GetValue()<<endl;
-            return array->GetValue()[i];
-        }
+    if(a.size() == 1) {
+        cout << "Got in here!" << endl;
+        return array->GetValue()[a[0] - 1];
     }
-    return obj;
+    else {
+        cout << a[0] << endl;
+        a.erase(a.begin());
+        cout << a[0] << endl;
+        return geter(a , array->GetValue()[a[0] - 1]);
+    }
+    // for(int i=0;i<array->GetValue().size();i++){
+    //     //cout<<"for"<<endl;
+        
+    //     if(i==a[0]-1){
+    //         //cout<<"mphka"<<endl;
+    //         //NumberObject* number = static_cast<NumberObject*>(&array->GetValue());
+    //         // cout<<array->GetValue()<<endl;
+    //         return array->GetValue()[i];
+    //     }
+    // }
+    // return obj;
 }
 
 

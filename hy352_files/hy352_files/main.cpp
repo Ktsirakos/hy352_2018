@@ -44,12 +44,17 @@ START_PROGRAMM
     MAKE boolean = BOOLEAN: TRUE;
 
     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
-    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
+    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 ,ARRAY { WORD: "Hello Mac" , NUMBER:187} ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
     cout << integer <<  endl;
     cout << word << endl;
     cout << boolean << endl;
     cout << list << endl;
     cout << array << endl; 
+
+
+MAKE itemnew = ITEM({4 , 1} , array)
+
+PRINT(itemnew)
 
 IF OR(x==integer,integer==(NUMBER:20) ,boolean == (BOOLEAN: FALSE)) DO
 
