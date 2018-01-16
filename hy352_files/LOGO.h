@@ -69,8 +69,8 @@
 
 
 
-#define SETPENCOLOR  SetPenColor2() = LIST 
-#define SETSCREENCOLOR  SetScreenColor2() = LIST 
+#define SETPENCOLOR  ;SetPenColor2() = LIST 
+#define SETSCREENCOLOR  ;SetScreenColor2() = LIST 
 #define FORWARD ;Forward2()=
 #define BACK ;Back2()=
 #define RIGHT ;Right2()=
@@ -81,7 +81,7 @@
 #define PENUP ;PenUp2()
 #define CENTER ;Center2()
 #define PRINT ;Print2()=
-#define SETXY  SetXY2() = LIST 
+#define SETXY  ;SetXY2() = LIST 
 
 
 
