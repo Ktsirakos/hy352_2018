@@ -8,6 +8,7 @@
 #define START_PROGRAMM using namespace std; int main (int argc,char **argv){  __count.push_back(NumberObject(0));\
                                                         __iter.push_back(false);\
                                                     init_GUI();\
+													vector<Objects> vec;
 
                                           
 #define END_PROGRAMM ;destroy_GUI(); return 0; }
@@ -20,7 +21,7 @@
 
 #define BOOLEAN *(new BooleanObject()) =false? false 
 #define LIST    (*(new ListObject())) 
-#define ARRAY  (*(new ArrayObject())).vec  =
+#define ARRAY  (*(new ArrayObject()))  = vec = 
 
 #define TRUE true 
 #define FALSE false
@@ -332,6 +333,10 @@ public:
 
 
     ArrayObject(){ setId(); }
+
+	ArrayObject(vector<Objects> x) {
+		setList(x); setId(); 
+	}
 };
 
 
@@ -398,6 +403,7 @@ public:
 
 class Left2 {
 public:
+
     Left2(int x){
         turtle_rotate(-x)
         PRINT1("mphka sthn int left")
@@ -406,7 +412,7 @@ public:
     Left2(Objects x){
         NumberObject* number = static_cast<NumberObject*>(&x);
         int tmp=number->GetValue();
-        turtle_rotate(tmp);
+        turtle_rotate(-tmp);
         //PRINT(x);
         PRINT1("mphka sthn NumberObject left");
     }
@@ -770,6 +776,18 @@ public:
 };
 
 
+
+//ArrayObject  operator,(vector<Objects> a , vector<Objects>  b){
+//
+//	for (int i = 0; i < b.size(); i++) {
+//		a.push_back(b[i]);
+//	}
+//
+//
+//    return a;
+//}
+
+
 vector<Objects>  operator,(ListObject c , vector<Objects>  myvec){
     myvec.push_back(c);
     return myvec;
@@ -889,7 +907,10 @@ Objects  geter(vector<int>  a, Objects b) {
     
     
     if(a.size() == 1) {
-        return array->GetValue()[a[0] - 1];
+		vector<Objects> temp;
+        temp = array->GetValue();
+        Objects tempObject = temp[a[0] - 1];
+        return tempObject;
     }
     
     
@@ -1119,7 +1140,7 @@ public:
 		vector<Objects> vec = list.GetValue();
 		number1 = static_cast<NumberObject*>(&vec[0]);
 		number2 = static_cast<NumberObject*>(&vec[1]);
-		number2 = static_cast<NumberObject*>(&vec[2]);
+		number3 = static_cast<NumberObject*>(&vec[2]);
 
 		set_pen_color(number1->GetValue(), number2->GetValue() , number3->GetValue());
 	}
