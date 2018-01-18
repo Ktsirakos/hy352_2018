@@ -17,8 +17,6 @@
 
 START_PROGRAMM
 
-
-
 MAKE turtleMoves = LIST [ 
 	ARRAY {WORD: "FORWARD", NUMBER : 100 },
 	ARRAY {WORD: "RIGHT", NUMBER: 90}, 
@@ -58,6 +56,9 @@ MAKE turtleMoves = LIST [
 			FORWARD NUMBER: 2 
 			LEFT NUMBER: 1 
 		END
+
+
+		SETXY  NUMBER:35,NUMBER:12
 
 
 

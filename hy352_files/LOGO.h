@@ -22,6 +22,7 @@
 #define BOOLEAN *(new BooleanObject()) =false? false 
 #define LIST    (*(new ListObject())) 
 #define ARRAY  (*(new ArrayObject()))  = vec = 
+//#define SIZE Size<Objects>() = false?-1
 
 #define TRUE true 
 #define FALSE false
@@ -82,7 +83,7 @@
 #define PENUP ;PenUp2()
 #define CENTER ;Center2()
 #define PRINT ;Print2()=
-#define SETXY  ;SetXY2() = LIST
+#define SETXY  ;SetXY2() = 
 
 using namespace std;
 
@@ -338,6 +339,7 @@ public:
 		setList(x); setId(); 
 	}
 };
+
 
 
 class Forward2{
@@ -1080,34 +1082,31 @@ class Show {
 
 
 class SetXY2 {
+
+	private:
+
+	NumberObject numberFirst;
+
 public:
 	SetXY2() {}
 
-	SetXY2(ListObject list) {
 
-		if (list.GetValue().size() != 2) {
-			cout << "Exactly 2 arguments expected!" << endl;
-			exit(3);
-		}
-
-
-		if (list.GetValue()[0].getId() != "number" || list.GetValue()[1].getId() != "number") {
-			cout << "Invalid arguments" << endl;
-			exit(3);
-		}
+	SetXY2 operator, (NumberObject b) {
+		cout << "Came here with " << this->getNumberFirst() << " " << b << endl;
+		turtle_go_to_position(getNumberFirst().GetValue(), b.GetValue());
+		return *this;
+	}
 
 
-		NumberObject* number1;
-		NumberObject* number2;
+	SetXY2(NumberObject list) {
 
-		vector<Objects> vec = list.GetValue();
-		number1 = static_cast<NumberObject*>(&vec[0]);
-		number2 = static_cast<NumberObject*>(&vec[1]);
-
-		turtle_go_to_position(number1->GetValue(), number2->GetValue());
+		numberFirst = list;
 
 	}
 
+	NumberObject getNumberFirst() {
+		return numberFirst;
+	}
 };
 
 
