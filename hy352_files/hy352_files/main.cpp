@@ -15,39 +15,25 @@
 
 #include "../LOGO.h"
 
-//TO maxi WITH args FSTART
-//PRINT(ARG(3));
-//RETURN
-//FEND
-
-// START_PROGRAMM
-
-//     MAKE integer =  NUMBER:20
-//     MAKE x =  NUMBER:10
-//     MAKE y =  NUMBER:30
-//     MAKE word = WORD: "Hello i am here!"
-//     MAKE boolean = BOOLEAN: TRUE;
-
-//     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
-//     MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
-//     cout << integer <<  endl;
-//     cout << word << endl;
-//     cout << boolean << endl;
-//     cout << list << endl;
-//     cout << array << endl; 
-
+TO maxi WITH  FSTART
+//cout<<"perasa"<<endl;
+SHOW:ARG(1)
+//;cout<<"perasa jana"<<endl;
+RETURN
+FEND
 
 START_PROGRAMM
 
-MAKE integer =  NUMBER:70
+    MAKE integer =  NUMBER:70
     MAKE x =  NUMBER:10
     MAKE y =  NUMBER:30
     MAKE word = WORD: "Hello i am here!"
     MAKE word1 = WORD: "Hello i am here here here!"
     MAKE boolean = BOOLEAN: TRUE;
+    MAKE de= ARRAY SIZE:30
 
     MAKE list = LIST [ WORD: "hELLO " , WORD: "WORLD"];
-    MAKE array =  ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
+    MAKE array = ARRAY { NUMBER:20 , NUMBER:12 , NUMBER:7 , WORD:"Hello Mac" ,NUMBER:2 ,NUMBER:13 ,BOOLEAN: TRUE };
     SHOW:integer
     SHOW:word
     SHOW:boolean
@@ -57,7 +43,11 @@ MAKE integer =  NUMBER:70
 
 //x=ITEM({1}, array);
 
-SHOW:x
+
+
+//SIZE:NUMBER: 30
+SHOW:x;
+
 IF OR(x==integer,integer==(NUMBER:20) ,boolean == (BOOLEAN: FALSE)) DO
 
 PRINT1(x)
@@ -82,10 +72,10 @@ MAKE myMoves = ARRAY
 
 
 
-MAKE re=NUMBER:2000
-SHOW:re
+//MAKE re=NUMBER:2000
+//SHOW:re
 //re=WORD:"thamosssss";
-SHOW:re
+//SHOW:re
 //MAKE z1 = word1==word;
 //
 SHOW:word1;
@@ -94,7 +84,7 @@ SHOW:word1;
 
 PENUP
 SETSCREENCOLOR [NUMBER:255 , NUMBER:100 , NUMBER:0]
-SETXY[NUMBER:100,  NUMBER:100];
+SETXY[NUMBER:100,  NUMBER:100]
 
 
 //;FORWARD 10;
@@ -119,10 +109,10 @@ SETXY[NUMBER:100,  NUMBER:100];
 ////
 REPEAT 5 TIMES DO
 REPCOUNT
-PRINT1(REPCOUNT);
+SHOW:REPCOUNT
     REPEAT 5 TIMES DO
     REPCOUNT
-    PRINT1(REPCOUNT);
+    SHOW:REPCOUNT
     END
 END
 ////cout << "=================\n";
@@ -132,12 +122,15 @@ END
 //
 ////cout<<w<<endl;
 ////cout<<re<<endl;
-////int r=10;
-////REPEAT WHILE x != (NUMBER:19) DO
-////r++;
-////PRINT(r);
-////ENDs
-////PRINT(r);
+
+MAKE makhs =NUMBER:10
+ASSIGN makhs=SUM(makhs,NUMBER:1)
+SHOW:makhs
+
+REPEAT WHILE makhs <= (NUMBER:19) DO
+ASSIGN makhs=SUM(makhs,NUMBER:1)
+SHOW:makhs
+END
 ////x != NUMBER:19
 MAKE k = SUM (x,x,NUMBER:40,x,NUMBER:40,NUMBER:40)
 SHOW:k
@@ -152,17 +145,17 @@ MAKE ze = PRODUCT (QUOTIENT(NUMBER:12,NUMBER:6,NUMBER:2),x,NUMBER: 12)
 SHOW:ze
 MAKE v4 = QUOTIENT(NUMBER:12,NUMBER:6,NUMBER:2)
 SHOW:v4
-//
-//MAKE v5 = MODULO (x,NUMBER:12,x,x,NUMBER:7,NUMBER:4)
-//SHOW:v5
 
-////MAKE list1 = LIST [ NUMBER: 10 , NUMBER :20 , NUMBER:40]
-////PRINT(list1)
-////
-////MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27] ,  NUMBER:30]
-////PRINT(list2)
-////max(1,2);
-//
+MAKE v5 = MODULO (x,NUMBER:12,x,x,NUMBER:7,NUMBER:4)
+SHOW:v5
+
+MAKE list1 = LIST [ NUMBER: 10 , NUMBER :20 , NUMBER:40]
+PRINT(list1)
+
+MAKE list2 = LIST [ LIST [  NUMBER:24  , NUMBER: 27] ,  NUMBER:30]
+//PRINT(list2)
+//max(1,2);
+
 //
 ////MAKE array2 = ARRAY {
 ////    NUMBER:20 ,
@@ -194,8 +187,11 @@ SHOW:v4
 //END
 //
 //cout<<"thanos"<<endl;
-//CALL maxi(LIST[LIST[NUMBER:30,NUMBER:3],NUMBER:20,NUMBER:10]);
-//
+CALL maxi(LIST[LIST[NUMBER:30,NUMBER:3],NUMBER:20,NUMBER:10]);
+
+//vector<int>kkk;
+//CALL maxi1(kkk);
+
 //
 //;cout<<"thanos"<<endl;
 //
