@@ -57,6 +57,7 @@ MAKE turtleMoves = LIST [
 			LEFT NUMBER: 1 
 		END
 
+		PENUP
 
 		SETXY  NUMBER:35,NUMBER:12
 
