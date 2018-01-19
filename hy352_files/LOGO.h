@@ -20,9 +20,11 @@
 #define NUMBER *(new NumberObject()) = 0?  -10000
 
 #define BOOLEAN *(new BooleanObject()) =false? false 
-#define LIST    (*(new ListObject())) 
-#define ARRAY  (*(new ArrayObject()))  = vec = 
-//#define SIZE Size<Objects>() = false?-1
+
+#define LIST (*(new ListObject()))
+#define ARRAY (*(new ArrayObject())) = vec =
+
+#define SIZE  (*(new ArrayObject()))  = false?1
 
 #define TRUE true 
 #define FALSE false
@@ -49,24 +51,25 @@
 #define QUOTIENT divi
 #define MODULO mod
 #define MINUS mini
-#define ASSIGN
+#define ASSIGN ;
 
-#define REPEAT ; enter_iter();for(int i =0  ; i<
-#define WHILE i;){} while(
-#define TIMES ;i++
+#define REPEAT ; enter_iter();for(int ___i =0  ; ___i<
+#define WHILE ___i ;){} while(
+#define TIMES ; ___i++
 #define FOREACH ;enter_iter();for(Objects& ___items :
 #define SHOW    ;Show() = false?Objects()
 #define ELEM ___items
 #define REPCOUNT __count[__count.size()-1]
 
 
-#define TO void
-#define WITH (ListObject
-#define FSTART ){
-#define FEND }
-#define CALL 
-#define ARG(x) args.GetValue()[x-1]
-#define RETURN return;
+#define TO ;void
+#define WITH (ListObject __args , int
+#define FSTART = 0){
+#define FEND ;}
+#define CALL ;
+#define ARG(x) __args.GetValue()[x-1]
+//#define ARGS x
+#define RETURN ;return;
 
 
 
@@ -84,6 +87,7 @@
 #define CENTER ;Center2()
 #define PRINT ;Print2()=
 #define SETXY  ;SetXY2() = 
+
 
 using namespace std;
 
@@ -224,7 +228,6 @@ public:
 
 };
 
-
 vector<Objects> __count;
 vector<bool>__iter;
 
@@ -232,7 +235,6 @@ void enter_if(){
     __count.push_back(REPCOUNT);
     __iter.push_back(false);
     
-
 }
 
 void enter_iter(){
@@ -301,16 +303,21 @@ public:
         return getList();
     }
 
+    
     ListObject operator[] (vector<Objects> contents){
             return ListObject(contents);
     }
 
     ListObject(vector<Objects> _list){ setList(_list); setId(); }
     
+    ListObject(double _x){ setNumber(_x); setId(); };
+    
     ListObject(){
         setId();
     }
-
+    
+    
+    
 };
 
 
@@ -328,16 +335,25 @@ public:
     void setValue(vector<Objects> vec){
         setList(vec);
     }
+    
     vector<Objects> GetValue(){
         return getList();
     }
+    
+//    ArrayObject(Objects x) {
+//         setId();
+//    }
 
-
+    
     ArrayObject(){ setId(); }
 
 	ArrayObject(vector<Objects> x) {
 		setList(x); setId(); 
 	}
+    vector<Objects>operator=(int x){
+        vector<Objects> size(x);
+        return size;
+    }
 };
 
 
